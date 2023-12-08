@@ -1,4 +1,8 @@
-# Deep-Multi-Task-and-Meta-Learning
+# Paper review study 참여자
+김진겸
+민예린
+전은영
+정유진
 
 ## 포스트 추가 및 페이지 빌드
 
