@@ -64,9 +64,11 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '_posts/RAG/Active_Retrieval_Augmented_Generation';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_posts/paper-review/Active_Retrieval_Augmented_Generation';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="SAMPLE TITLE" href="sample_page.html" />
+    <link rel="prev" title="인트로" href="../intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -163,9 +165,9 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Review</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../paper-review/Active_Retrieval_Augmented_Generation.html">Active Retrieval Augmented Generation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../paper-review/sample_page.html">SAMPLE TITLE</a></li>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Active Retrieval Augmented Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sample_page.html">SAMPLE TITLE</a></li>
 </ul>
 
     </div>
@@ -237,7 +239,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/executablebooks/Paper-review-study/issues/new?title=Issue%20on%20page%20%2F_posts/RAG/Active_Retrieval_Augmented_Generation.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/executablebooks/Paper-review-study/issues/new?title=Issue%20on%20page%20%2F_posts/paper-review/Active_Retrieval_Augmented_Generation.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -267,7 +269,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../../_sources/_posts/RAG/Active_Retrieval_Augmented_Generation.md" target="_blank"
+      <li><a href="../../_sources/_posts/paper-review/Active_Retrieval_Augmented_Generation.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -406,7 +408,7 @@ document.write(`
 </ul>
 </li>
 </ul>
-<img src="./img/FLARE/Architecture.png" alt="FLARE 구조" width="1000" >
+<img src="./materials/FLARE/Architecture.png" alt="FLARE 구조" width="1000" >
 </section>
 <section id="background">
 <h2>Background<a class="headerlink" href="#background" title="Permalink to this heading">#</a></h2>
@@ -414,14 +416,14 @@ document.write(`
 <section id="rag-retrieval-augment-generation">
 <h2>기본 RAG(Retrieval-Augment Generation) 구조<a class="headerlink" href="#rag-retrieval-augment-generation" title="Permalink to this heading">#</a></h2>
 <ul>
-<li><img src="./img/FLARE/RAG.png" widht=800>
+<li><img src="./materials/FLARE/RAG.png" widht=800>
 </li>
 <li><p>간단하게 말하자면 LLM에 사용자의 질문을 넣어서 답을 구할때 사용자의 질문만 넣는 것이 아니라 관련된 document를 검색해서 generate 하는 방식</p></li>
 <li><p>자세한 과정</p>
 <ol class="arabic simple">
 <li><p>Query가 들어오면 Query 인코더를 통과해 임베딩을 뽑음</p></li>
 <li><p>임베딩 내적값을 활용해 query와 가장 유사한 document를 검색</p></li>
-<li><p>그 후 검색된 document(Top-k) + Query를 LLM generator(보통 Bart, T5) r에 input으로 넣음</p></li>
+<li><p>그 후 검색된 document (Top-k) + Query를 LLM generator(보통 Bart, T5) r에 input으로 넣음</p></li>
 <li><p>LLM (generator) 가 답변을 generate</p></li>
 </ol>
 </li>
@@ -454,7 +456,7 @@ document.write(`
 </section>
 <section id="question-decomposition-self-ask">
 <h3>Question-Decomposition(Self-ASK)<a class="headerlink" href="#question-decomposition-self-ask" title="Permalink to this heading">#</a></h3>
-<img src="./img/FLARE/self-ask.png" width=800>
+<img src="./materials/FLARE/self-ask.png" width=800>
 <ul class="simple">
 <li><p>질문을 분해해서 Multi-hop 질문을 할 수 있도록…</p></li>
 <li><p><strong>단점</strong>: Problem (task)에 따라서 대응 /  prompt engineering 을 진행해야함</p>
@@ -478,7 +480,7 @@ document.write(`
 <ul class="simple">
 <li><p>LLM이 생성하다가 추가 정보가 필요할때마다 [Search(query)] 생성</p></li>
 <li><p>prompt 예시<br>
-<img src="./img/FLARE/FLARE_with_Retrieval_Instructions.png"></p></li>
+<img src="./materials/FLARE/FLARE_with_Retrieval_Instructions.png"></p></li>
 </ul>
 </section>
 <section id="direct-flare">
@@ -517,7 +519,7 @@ document.write(`
 <p>검색 Query 생성 방법</p>
 <ul class="simple">
 <li><p>이것도 임계값 기준으로 (<span class="math notranslate nohighlight">\(\beta\)</span>) <br>
-<img src="./img/FLARE/make_query.png"></p></li>
+<img src="./materials/FLARE/make_query.png"></p></li>
 </ul>
 <ol class="arabic simple">
 <li><p>Implicit query</p></li>
@@ -525,7 +527,7 @@ document.write(`
 <ul class="simple">
 <li><p>토큰들 중 임계값보다 낮은 토큰을 마스킹하고 검색에 활용</p></li>
 <li><p>계산 식 <br>
-<img src="./img/FLARE/implict_query.png"></p></li>
+<img src="./materials/FLARE/implict_query.png"></p></li>
 </ul>
 <ol class="arabic simple" start="2">
 <li><p>explicit query</p></li>
@@ -533,14 +535,14 @@ document.write(`
 <ul class="simple">
 <li><p>토큰들 중 임계값보다 낮은 토큰과 llm을 활용해서 새롭게 query를 만들어서 검색에 활용</p></li>
 <li><p>prompt 예시 <br>
-<img src="./img/FLARE/explict_query.png"></p></li>
+<img src="./materials/FLARE/explict_query.png"></p></li>
 </ul>
 </section>
 </section>
 </section>
 <section id="experiment">
 <h2>Experiment<a class="headerlink" href="#experiment" title="Permalink to this heading">#</a></h2>
-<img src="./img/FLARE/main_result.png">
+<img src="./materials/FLARE/main_result.png">
 <ul class="simple">
 <li><p>모든 benchmark에서 성능이 개선됨.</p></li>
 <li><p>MultiHopQA에서 가장 크게 개선</p>
@@ -570,7 +572,7 @@ document.write(`
         },
         kernelOptions: {
             name: "python3",
-            path: "./_posts/RAG"
+            path: "./_posts/paper-review"
         },
         predefinedOutput: true
     }
@@ -587,6 +589,24 @@ document.write(`
                 <footer class="prev-next-footer">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="../intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">인트로</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="sample_page.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">SAMPLE TITLE</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
