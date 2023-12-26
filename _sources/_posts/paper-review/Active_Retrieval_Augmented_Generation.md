@@ -77,8 +77,8 @@ Confidence 계산 방법
     - 그렇지 않다면 검색 활용
 
 검색 Query 생성 방법
-- 이것도 임계값 기준으로 ($\beta$) <br>
-    <img src="./materials/FLARE/make_query.png">
+- 이것도 임계값 기준으로 ($\beta$)
+<img src="./materials/FLARE/make_query.png">
 1) Implicit query
 - 토큰들 중 임계값보다 낮은 토큰을 마스킹하고 검색에 활용
 - 계산 식 <br>
