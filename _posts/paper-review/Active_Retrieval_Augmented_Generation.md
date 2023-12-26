@@ -1,4 +1,3 @@
-#%% md
 # Active Retrieval Augmented Generation
 
 ## Overview
