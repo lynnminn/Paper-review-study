@@ -1,0 +1,800 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Ask Me Anything: A simple strategy for prompting language models &#8212; 논문 리뷰 스터디 - NLP, RL, CV</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_posts/paper-review/Ask_Me_Anything';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="SAMPLE TITLE" href="sample_page.html" />
+    <link rel="prev" title="Active Retrieval Augmented Generation" href="Active_Retrieval_Augmented_Generation.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">논문 리뷰 스터디 - NLP, RL, CV</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    인트로
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Review</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Active_Retrieval_Augmented_Generation.html">Active Retrieval Augmented Generation</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Ask Me Anything: A simple strategy for prompting language models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sample_page.html">SAMPLE TITLE</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/Paper-review-study" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/Paper-review-study/issues/new?title=Issue%20on%20page%20%2F_posts/paper-review/Ask_Me_Anything.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/_posts/paper-review/Ask_Me_Anything.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Ask Me Anything: A simple strategy for prompting language models</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">키워드</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preview">주관적인 Preview 이자 전부</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#method">Method</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#effective-prompt-formats">1. Effective Prompt Formats!</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ama-s-prompt-format">AMA’s prompt format</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-prompt-collections-at-scale">2. Creating Prompt Collections at Scale</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prompt-aggregation">3. Prompt Aggregation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aggregation">Aggregation 방법</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#notation">Notation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">전체 아키텍쳐</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#experiments">Experiments</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#insight">얻을 수 있는 insight</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reference">Reference</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="ask-me-anything-a-simple-strategy-for-prompting-language-models">
+<h1>Ask Me Anything: A simple strategy for prompting language models<a class="headerlink" href="#ask-me-anything-a-simple-strategy-for-prompting-language-models" title="Permalink to this heading">#</a></h1>
+<p><a class="reference external" href="https://arxiv.org/abs/2210.02441"><img alt="arXiv" src="https://img.shields.io/badge/arXiv-2210.02441-b31b1b.svg" /></a>
+<a class="reference external" href="https://github.com/HazyResearch/ama_prompting"><img alt="Hugging Face Spaces" src="https://img.shields.io/badge/GitHub-181717?logo=github&amp;logoColor=white" /></a></p>
+<section id="id1">
+<h2>키워드<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>ICLR 2023 top 25%</p></li>
+<li><p>In-context learning</p></li>
+<li><p>Effective prompting</p></li>
+</ul>
+</section>
+<section id="preview">
+<h2>주관적인 Preview 이자 전부<a class="headerlink" href="#preview" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>In-context learning에서 일반적(general)으로 사용할 수 있는 prompting 방법 제시</p></li>
+<li><p>효과는 굉장했다!</p>
+<ul>
+<li><p>6B 모델로 175B보다 뛰어넘거나 비슷한 성능!
+<img alt="result" src="../../_images/result.png" /></p></li>
+</ul>
+</li>
+<li><p>주관적 입장: 앙상블로 정확도 높인 느낌 (**: contribution)</p>
+<ul>
+<li><p>기존 프롬프트를 모델이 학습 시 많이 본 <strong>**QA 형태(QA Prompt Chains)**</strong> 로 여러 개 생성</p></li>
+<li><p>생성된 여러 답 중 그래프 구조의 weighted Majority vote 통해 최종 답 선택 (<strong>**weak supervision**</strong>)
+<img alt="overview" src="../../_images/overview.png" /></p></li>
+<li><p>(번외) NLP의 self-consistency와 유사</p></li>
+</ul>
+</li>
+<li><p>분석이 굉장허다!</p>
+<ul>
+<li><p>모든 아이디어의 근거가 있음, 엄청난 새로운 아이디어가 있는 건 아니지만 연구적으로 좋은 논문</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
+<ul>
+<li><p>LLM은 in-context learning 가능하지만 프롬프트를 어떻게 설정하는지에 따라 성능 차이가 크다</p>
+<ul class="simple">
+<li><p>작은 프롬프트 변화 → 성능 큰 variation</p></li>
+<li><p>모델-by-모델, task-by-task 프롬프팅 필요</p></li>
+<li><p>좋은 성능을 위해 perfect prompt가 필요</p></li>
+<li><p>권고 사항이 사람이 메뉴얼하게 찾는 것 ⇒ Nooooooooooo!</p></li>
+</ul>
+</li>
+<li><p>목적</p>
+<blockquote>
+<div><p>This work instead consider <code class="docutils literal notranslate"><span class="pre">aggregating</span></code> the predictions of <code class="docutils literal notranslate"><span class="pre">multiple</span> <span class="pre">effective</span></code>, yet <code class="docutils literal notranslate"><span class="pre">imperfect,</span> <span class="pre">prompts</span></code> to improve prompting performance <code class="docutils literal notranslate"><span class="pre">over</span> <span class="pre">a</span> <span class="pre">broad</span> <span class="pre">set</span> <span class="pre">of</span> <span class="pre">models</span> <span class="pre">and</span> <span class="pre">tasks</span></code>.</p>
+</div></blockquote>
+</li>
+<li><p>고려할 점</p>
+<ul class="simple">
+<li><p>Effective prompts
+</br>: 여러 task와 여러 모델에 잘 동작하는 프롬프트 format 찾기</p></li>
+<li><p>Scalable collections
+</br>: task를 reformatting해서 여러 개로 만드는 전략</p></li>
+<li><p>Prompt aggregation (Multi-Head Attention 느낌)
+</br>: 정확도와 의존성(?)을 고려하는 Majority Vote 전략</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="method">
+<h2>Method<a class="headerlink" href="#method" title="Permalink to this heading">#</a></h2>
+</section>
+<section id="effective-prompt-formats">
+<h2>1. Effective Prompt Formats!<a class="headerlink" href="#effective-prompt-formats" title="Permalink to this heading">#</a></h2>
+<ul>
+<li><p>태스크, 모델(종류,크기)에 전반적으로 잘 작동하는 효과적인 프롬프트 포맷 찾기</p></li>
+<li><p>이전 연구를 참고하여 3가지 포맷을 실험</p>
+<ul>
+<li><p>restrictive question : 아웃풋 형태 제한</p>
+<blockquote>
+<div><p>John invited Mark to come watch Jarassic Park. Output True or False?</p>
+</div></blockquote>
+</li>
+<li><p>cloze-question : 빈칸 채우기</p>
+<blockquote>
+<div><p>John invited Mark to come watch Jurassic _</p>
+</div></blockquote>
+</li>
+<li><p>free-form question (traditional QA): yes-no, Wh 형태</p>
+<blockquote>
+<div><p>Where did John invite Mark?</p>
+</div></blockquote>
+</li>
+</ul>
+</li>
+<li><p>결과
+<img alt="format_result" src="../../_images/format_result.png" /></p></li>
+<li><p>open-ended &gt; restrictive</p>
+<ul class="simple">
+<li><p>open-ended(cloze, free-form QA)</p></li>
+<li><p>모델 크기에 따른 relative gain이 적다 ⇒ 전반적으로 잘 동작한다</p></li>
+</ul>
+</li>
+<li><p>open-ended 단점: 원하는 아웃풋 class로의 mapping이 요구될 수 있다.</p>
+<ul class="simple">
+<li><p>ex. 글 종류 분류 task에서 open-ended 아웃풋이 ‘journal’,
+</br> 하지만 원하는 아웃풋 class에는 journal이 없음
+</br> -&gt; <strong>mapping</strong> 프롬프트 : A ‘journal’ maps to category: written work</p></li>
+</ul>
+</li>
+<li><p>QA가 더 좋은 이유?</p>
+<ul class="simple">
+<li><p>foundation 모델의 편향된 데이터셋, open-ended가 훨씬 많음</p></li>
+<li><p>즉, foundation 모델이 많이 본 형태로 입력하는 것이 좋다. 특히 모델 크기가 작은 경우 더 그럼.
+</br>(6B는 애기에요)
+<img alt="format_count" src="../../_images/format_count.png" /></p></li>
+</ul>
+</li>
+</ul>
+<section id="ama-s-prompt-format">
+<h3>AMA’s prompt format<a class="headerlink" href="#ama-s-prompt-format" title="Permalink to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>(question) : LLM이 input을 question으로 생성</p></li>
+<li><p>(answer) : 생성된 question으로 LLM으로 답 유추
+<img alt="ama_prompting" src="../../_images/ama_prompting.png" /></p></li>
+</ol>
+</section>
+</section>
+<section id="creating-prompt-collections-at-scale">
+<h2>2. Creating Prompt Collections at Scale<a class="headerlink" href="#creating-prompt-collections-at-scale" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>multiple QA 프롬프트 생성하기</p>
+<ul>
+<li><p>다각도의 정보 수집하고 답 추출 ⇒ 성능 향상</p>
+<ul>
+<li><p>ex. Who went to the park?, Did John go the park?, Where did John go?</p></li>
+</ul>
+</li>
+<li><p>multiple QA ⇒ prompt()-chain, task 상관없이 적용되기 때문에 functional 형태</p>
+<ul>
+<li><p>하지만 코드를 보면 task 별 in-context prompting이 상당함…</p></li>
+<li><p>mapping 프롬프트도 허점…</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>prompt()-chain
+<img alt="vary_prompt" src="../../_images/vary_prompt.png" /></p>
+<ul>
+<li><p>question(): <span class="math notranslate nohighlight">\(x \rightarrow q\)</span> , input <span class="math notranslate nohighlight">\(x\)</span>로부터 <em><strong>qeustion</strong></em> <span class="math notranslate nohighlight">\(q\)</span> 생성</p>
+<ul>
+<li><p>in-context demonstration, style of question</p></li>
+</ul>
+</li>
+<li><p>answer(): <span class="math notranslate nohighlight">\(q \rightarrow a\)</span>,  생성된 question <span class="math notranslate nohighlight">\(q\)</span>에서 후보 답 <span class="math notranslate nohighlight">\(a\)</span> 생성</p></li>
+</ul>
+</li>
+<li><p>prompt()-chain 예제
+<img alt="prompt_ex" src="../../_images/prompt_ex.png" /></p></li>
+</ul>
+</section>
+<section id="prompt-aggregation">
+<h2>3. Prompt Aggregation<a class="headerlink" href="#prompt-aggregation" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>prompt predictions을 하나의 아웃풋으로 aggreate
+</br> ⇒ 그래프 구조의 weighted Majority vote 사용</p></li>
+<li><p>그래프 의존도 구조와 정확도 예측 모델을 weak supervision으로 학습</p>
+<ul>
+<li><p>과정이 복잡하나 새로운 아이디어를 제시한 것은 아니고 기존 있었던 방법을 고대로 결합</p></li>
+<li><p>의존도, 정확도 학습이 attention weight와 비슷한 것 같음. task와 질문의 관련도/중요도를 고려할 수 있는 방식인 것 같음</p></li>
+</ul>
+</li>
+</ul>
+<section id="aggregation">
+<h3>Aggregation 방법<a class="headerlink" href="#aggregation" title="Permalink to this heading">#</a></h3>
+<p><img alt="aggregation" src="../../_images/aggregation.png" />
+1. 의존도 그래프 <span class="math notranslate nohighlight">\(G\)</span> 학습</p>
+<ul class="simple">
+<li><p>학습 데이터: 데이터로 만든 question의 예측 집합(set) <span class="math notranslate nohighlight">\(\mathbf{P}(x)\)</span>,</p>
+<ul>
+<li><p>즉, answer()-chain</p></li>
+</ul>
+</li>
+<li><p>학습 방식: weak supervision, <span class="xref myst">Varma et al [2019]</span></p>
+<ul>
+<li><p><span class="xref myst">Learning Dependency Structures for Weak Supervision Models</span></p></li>
+</ul>
+</li>
+</ul>
+<p>2. 정확도 예측 모델 <span class="math notranslate nohighlight">\(Pr_{G,\theta}\)</span> 학습</p>
+<ul class="simple">
+<li><p>학습 데이터: 학습된 의존도 그래프 G, G의 학습 데이터 <span class="math notranslate nohighlight">\(\mathbf{P}(x)\)</span></p></li>
+<li><p>학습 방식 : weak supervision, <span class="xref myst">Ratner et al. [2018]</span></p>
+<ul>
+<li><p><span class="xref myst">Training Complex Models with Multi-Task Weak Supervision</span></p></li>
+</ul>
+</li>
+</ul>
+<p>3. 정확도 예측 모델의 확률값을 가장 크게하는 아웃풋 선택</p>
+</section>
+<section id="notation">
+<h3>Notation<a class="headerlink" href="#notation" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\phi_{WS}= argmax_{y \in Y} Pr_{G,\theta}(y,\mathbf{P}(x))\)</span> : aggregator</p></li>
+<li><p><span class="math notranslate nohighlight">\(Pr_{G,\theta}(y,\mathbf{P}(x))\)</span> : 확률 그래프 모델</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{P}=[p_1, p_2, ..., p_m]\)</span>: m 개의 question 프롬프트</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{P}(x)=[p_1(x), p_2(x), ..., p_m(x)]\)</span> : 입력값 <span class="math notranslate nohighlight">\(x\)</span>에 대한 question 프롬프트의 예측값</p></li>
+<li><p><span class="math notranslate nohighlight">\(G=(V,E)\)</span> : 의존도 그래프</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(V=\{y, \mathbf{P}(x)\}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\((p_i(x), p_j(x)) \in E: edgeset,\;\;\; iff \;\;\;p_i(x),p_j(x): cond.\; indep.\;\; given\; y\)</span></p></li>
+</ul>
+</li>
+<li><p><span class="math notranslate nohighlight">\(\theta\)</span> : 정확도 예측 모델의 파라미터</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="id2">
+<h2>전체 아키텍쳐<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p><img alt="overview" src="../../_images/overview.png" /></p>
+<ul class="simple">
+<li><p>QA 형태의 (multiple) prompt chain</p></li>
+<li><p>그래프를 사용한 Aggregator, 학습 시 WS(weak supervision) 사용</p></li>
+</ul>
+</section>
+<section id="experiments">
+<h2>Experiments<a class="headerlink" href="#experiments" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>결과</p>
+<ul>
+<li><p>classification task들…
+<img alt="result_with_cap" src="../../_images/result_with_cap.png" /></p></li>
+</ul>
+</li>
+<li><p>Error Analysis</p>
+<ul>
+<li><p>Instruction-following errors: 특정 원하는 output space(ex.classification) 결과로 안나오는 경우</p></li>
+<li><p>Knowledge errors: Factual, Commonsense 에서는 성능 크게 오르지 않음</p></li>
+<li><p>Long-context errors</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="insight">
+<h2>얻을 수 있는 insight<a class="headerlink" href="#insight" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>크기가 작은 모델로 성능을 내고자 할 땐 그 모델을 학습했던 데이터 형식을 사용하자</p></li>
+<li><p>그래프를 weak supervision으로 학습하고, weighted majority vote 할 수 있음</p>
+<ul>
+<li><p>일종의 attention weight</p></li>
+<li><p>답변에 더 도움되는 질문에 더 높은 가중치를, weak supervision으로 학습</p></li>
+<li><p>의존도 그래프 학습의 필요성?</p>
+<ul>
+<li><p>더 좋은 initialization이 될 수도 있을 것 같음 for faster, easier training</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://tungmphung.com/advanced-yet-simple-prompt-engineering-techniques-for-large-language-models/">https://tungmphung.com/advanced-yet-simple-prompt-engineering-techniques-for-large-language-models/</a></p></li>
+<li><p><a class="reference external" href="https://velog.io/&#64;mmodestaa/Ask-Me-Anything-A-simple-strategy-for-prompting-language-models">https://velog.io/&#64;mmodestaa/Ask-Me-Anything-A-simple-strategy-for-prompting-language-models</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=CD3exXnx49A">https://www.youtube.com/watch?v=CD3exXnx49A</a></p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./_posts/paper-review"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Active_Retrieval_Augmented_Generation.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Active Retrieval Augmented Generation</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="sample_page.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">SAMPLE TITLE</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">키워드</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preview">주관적인 Preview 이자 전부</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#method">Method</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#effective-prompt-formats">1. Effective Prompt Formats!</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ama-s-prompt-format">AMA’s prompt format</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-prompt-collections-at-scale">2. Creating Prompt Collections at Scale</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prompt-aggregation">3. Prompt Aggregation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aggregation">Aggregation 방법</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#notation">Notation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">전체 아키텍쳐</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#experiments">Experiments</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#insight">얻을 수 있는 insight</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reference">Reference</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By 김진겸/민예린/전은영/정유진
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
