@@ -426,9 +426,9 @@ document.write(`
 <hr class="docutils" />
 <ul class="simple">
 <li><p>name: TIES-MERGING: Resolving Interference When Merging Models</p></li>
-<li><p>link: <a class="reference external" href="https://arxiv.org/abs/2306.01708">https://arxiv.org/abs/2306.01708</a></p></li>
+<li><p>link: <a class="reference external" href="https://arxiv.org/abs/2306.01708">![arXiv]</a></p></li>
 <li><p>date: 23.06 (arxiv)</p></li>
-<li><p>code: <a class="github reference external" href="https://github.com/prateeky2806/ties-merging">prateeky2806/ties-merging</a></p></li>
+<li><p>code: <a class="reference external" href="https://github.com/prateeky2806/ties-merging">![GitHub]</a></p></li>
 </ul>
 </section>
 </section>
@@ -454,7 +454,7 @@ document.write(`
 <p>등등이 있다. 자세한 것은 위의 서베이를 참조하면 좋을듯</p>
 <p>어쨌든 위의 방식들은 결과적으로 weight를 섞는 것이기 때문에 서로 다른 모델 사이에 간섭이 생기는 경우, 성능 저해를 야기할 수 있다.</p>
 <p>이 논문에서는 이 <strong>간섭</strong>의 원인에 대해서 우선 분석하고 있다.
-![image](materials/tiesmerging/Pasted image 20231226175559.png)</p>
+![image](./materials/tiesmerging/Pasted image 20231226175559.png)</p>
 <section id="parameter">
 <h3>1) 중복 parameter로 인한 간섭 발생<a class="headerlink" href="#parameter" title="Permalink to this heading">#</a></h3>
 <p>(양측 그림의 동그라미 부분)
@@ -486,7 +486,7 @@ document.write(`
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="method-ties-merging-trim-elect-sign-merge">
 <h1>Method: Ties-Merging (Trim, Elect Sign &amp; Merge)<a class="headerlink" href="#method-ties-merging-trim-elect-sign-merge" title="Permalink to this heading">#</a></h1>
-<p>![image](materials/tiesmerging/Pasted image 20231227073512.png)</p>
+<p>![image](./materials/tiesmerging/Pasted image 20231227073512.png)</p>
 <p>각각의 모델 parameter값들을 <span class="math notranslate nohighlight">\(\theta_{t}, t \in [1...n]\)</span> 라고 할 때, task vector는 모델의 초기 parameter값 <span class="math notranslate nohighlight">\(\theta_{init}\)</span> 과 각각의 <span class="math notranslate nohighlight">\(\theta_t\)</span> 간의 차로 정의된다.</p>
 <p>이 task vector를 통해 최종 모델 parameter 값인 <span class="math notranslate nohighlight">\(\theta_{m}\)</span>을 만드는 것이 목적</p>
 <p>간단히 설명하면</p>
@@ -497,7 +497,7 @@ document.write(`
 <li><p>최종 vector로 <span class="math notranslate nohighlight">\(\theta_m\)</span> 만들기 뿅</p></li>
 </ol>
 <p>1)에서 top-k로 값을 잘라 버리면 모델의 성능이 떨어지지 않을까?라는 의문에 대한 실험
-![image](materials/tiesmerging/Pasted image 20231227144949.png)</p>
+![image](./materials/tiesmerging/Pasted image 20231227144949.png)</p>
 <section id="id2">
 <h2>상세<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
 <section id="definition">
@@ -533,7 +533,7 @@ document.write(`
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="experiments">
 <h1>Experiments<a class="headerlink" href="#experiments" title="Permalink to this heading">#</a></h1>
-<p>![image](materials/tiesmerging/Pasted image 20231228090116.png)</p>
+<p>![image](./materials/tiesmerging/Pasted image 20231228090116.png)</p>
 <ol class="arabic simple">
 <li><p>다른 방식에 비해 튜닝 시 성능이 좋음
 같은 데이터로 튜닝된 여러 모델들 (e.g. 허깅페이스에 있는 무수히 많은 QA모델)을 사용하는 경우 더 좋은 성능을 낼 수 있음</p></li>
@@ -541,18 +541,18 @@ document.write(`
 </ol>
 <section id="id4">
 <h2>분석<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
-<p>![image](materials/tiesmerging/Pasted image 20231228090655.png)</p>
+<p>![image](./materials/tiesmerging/Pasted image 20231228090655.png)</p>
 <ul class="simple">
 <li><p>각각의 효과를 알아보기 위해 trim / elect 중 하나만 써서 실험하였음.</p></li>
 <li><p>좌): 1개일 때랑 1개보다  많을 때랑 비교해도 크게 달라지지 않는다 = 작은 value에 의해 shrink되지 않는다.</p></li>
 <li><p>우): parameter끼리 sign이 갈리더라도 평균 magnitude가 기존보다는 유지됨(보라)</p></li>
 </ul>
-<p>![image](materials/tiesmerging/Pasted image 20231228092204.png)</p>
+<p>![image](./materials/tiesmerging/Pasted image 20231228092204.png)</p>
 <ul class="simple">
 <li><p>top-N / bottom-N 의 sign vector를 특정 확률(x축)로 뒤집어줌.</p></li>
 <li><p>top-N은 반대 방향으로 갈수록 성능이 급격히 떨어진다 (= sign interference를 주의해야 한다 &amp; top-N은 중요하다 &amp; bottom은 쓸다리가 없으니 trim해도 좋다)</p></li>
 </ul>
-<p>![image](materials/tiesmerging/Pasted image 20231228092049.png)</p>
+<p>![image](./materials/tiesmerging/Pasted image 20231228092049.png)</p>
 <ul class="simple">
 <li><p>ablation study.</p></li>
 </ul>
