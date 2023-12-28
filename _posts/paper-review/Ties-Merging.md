@@ -6,9 +6,9 @@
 * 이 간섭을 해결하기 위하여weight average 하기 전에 trim과 sign matching을 해줌.
 ---
 * name: TIES-MERGING: Resolving Interference When Merging Models
-* link: [![arXiv]](https://arxiv.org/abs/2306.01708)
+* link: [https://arxiv.org/abs/2306.01708](https://arxiv.org/abs/2306.01708)
 * date: 23.06 (arxiv)
-* code: [![GitHub]](https://github.com/prateeky2806/ties-merging)
+* code: [https://github.com/prateeky2806/ties-merging](https://github.com/prateeky2806/ties-merging)
 
 # Introduction
 
