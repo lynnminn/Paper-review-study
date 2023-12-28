@@ -487,14 +487,14 @@ document.write(`
 <section class="tex2jax_ignore mathjax_ignore" id="method-ties-merging-trim-elect-sign-merge">
 <h1>Method: Ties-Merging (Trim, Elect Sign &amp; Merge)<a class="headerlink" href="#method-ties-merging-trim-elect-sign-merge" title="Permalink to this heading">#</a></h1>
 <p>![image](materials/tiesmerging/Pasted image 20231227073512.png)</p>
-<p>각각의 모델 parameter값들을 $<span class="math notranslate nohighlight">\(\theta_{t}, t \in [1...n]\)</span><span class="math notranslate nohighlight">\( 라고 할 때, task vector는 모델의 초기 parameter값 \)</span><span class="math notranslate nohighlight">\(\theta_{init}\)</span><span class="math notranslate nohighlight">\( 과 각각의 \)</span><span class="math notranslate nohighlight">\(\theta_t\)</span>$ 간의 차로 정의된다.</p>
-<p>이 task vector를 통해 최종 모델 parameter 값인 $<span class="math notranslate nohighlight">\(\theta_{m}\)</span>$을 만드는 것이 목적</p>
+<p>각각의 모델 parameter값들을 <span class="math notranslate nohighlight">\(\theta_{t}, t \in [1...n]\)</span> 라고 할 때, task vector는 모델의 초기 parameter값 <span class="math notranslate nohighlight">\(\theta_{init}\)</span> 과 각각의 <span class="math notranslate nohighlight">\(\theta_t\)</span> 간의 차로 정의된다.</p>
+<p>이 task vector를 통해 최종 모델 parameter 값인 <span class="math notranslate nohighlight">\(\theta_{m}\)</span>을 만드는 것이 목적</p>
 <p>간단히 설명하면</p>
 <ol class="arabic simple">
 <li><p>top-k로 각각의 task vector 값을 자르고</p></li>
 <li><p>벡터 방향을 다수결로 결정하고</p></li>
 <li><p>그 방향에 해당되는 벡터값들을 합쳐서 최종 task vector를 만들고</p></li>
-<li><p>최종 vector로 $<span class="math notranslate nohighlight">\(\theta_m\)</span>$ 만들기 뿅</p></li>
+<li><p>최종 vector로 <span class="math notranslate nohighlight">\(\theta_m\)</span> 만들기 뿅</p></li>
 </ol>
 <p>1)에서 top-k로 값을 잘라 버리면 모델의 성능이 떨어지지 않을까?라는 의문에 대한 실험
 ![image](materials/tiesmerging/Pasted image 20231227144949.png)</p>
@@ -502,36 +502,32 @@ document.write(`
 <h2>상세<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
 <section id="definition">
 <h3>definition<a class="headerlink" href="#definition" title="Permalink to this heading">#</a></h3>
-<ul>
-<li><p>task vector: $<span class="math notranslate nohighlight">\(\tau_{t} = \theta_{t} - \theta_{init}\)</span>$</p></li>
-<li><p>sign vector: $<span class="math notranslate nohighlight">\(\gamma_{t} = sgn(\tau_t), sgn(x) \star |x| = x\)</span>$</p></li>
-<li><p>magnitude vector: $<span class="math notranslate nohighlight">\(\mu_t = |\tau_t|\)</span>$</p></li>
-<li><div class="math notranslate nohighlight">
-\[\tau_t = \mu_t \odot \gamma_t\]</div>
-</li>
+<ul class="simple">
+<li><p>task vector: <span class="math notranslate nohighlight">\(\tau_{t} = \theta_{t} - \theta_{init}\)</span></p></li>
+<li><p>sign vector: <span class="math notranslate nohighlight">\(\gamma_{t} = sgn(\tau_t), sgn(x) \star |x| = x\)</span></p></li>
+<li><p>magnitude vector: <span class="math notranslate nohighlight">\(\mu_t = |\tau_t|\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\tau_t = \mu_t \odot \gamma_t\)</span></p></li>
 </ul>
 </section>
 <section id="id3">
 <h3>구현<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
-<ol class="arabic">
+<ol class="arabic simple">
 <li><p>Trim</p>
-<ul>
+<ul class="simple">
 <li><p>각각의 모델에 대하여 top-k의 task value만 유지</p></li>
-<li><div class="math notranslate nohighlight">
-\[\hat{\tau_t} = \text{keep\_topk\_reset\_rest\_to\_zero}(\tau_t, k)\]</div>
-</li>
+<li><p><span class="math notranslate nohighlight">\(\hat{\tau_t} = \text{keep\_topk\_reset\_rest\_to\_zero}(\tau_t, k)\)</span></p></li>
 </ul>
 </li>
 <li><p>Elect Sign
 전체 task vector의 magnitude가 커지는 방향으로 sign vector를 재조정
-$<span class="math notranslate nohighlight">\(\gamma_m = sgn(\sum_{t=1}^{n}{\hat{\tau_t}})\)</span>$</p></li>
+<span class="math notranslate nohighlight">\(\gamma_m = sgn(\sum_{t=1}^{n}{\hat{\tau_t}})\)</span></p></li>
 <li><p>Disjoint Merge
 위에서 계산한 sign vector 방향의 모든 magnitude를 average
-$<span class="math notranslate nohighlight">\(\mathcal{A}^p = \left\{ t \in [n] | \hat{\gamma_t^p} = \gamma_m^p \right\}\)</span>$</p></li>
+<span class="math notranslate nohighlight">\(\mathcal{A}^p = \left\{ t \in [n] | \hat{\gamma_t^p} = \gamma_m^p \right\}\)</span></p></li>
 </ol>
-<p>마지막으로 최종 $<span class="math notranslate nohighlight">\(\theta_m\)</span><span class="math notranslate nohighlight">\( 구하기
-   \)</span><span class="math notranslate nohighlight">\(\theta_m = \theta_{init} + \lambda \star \tau_m\)</span><span class="math notranslate nohighlight">\(
-\)</span><span class="math notranslate nohighlight">\(\lambda\)</span>$ 값은 scaling hyperparameter</p>
+<p>마지막으로 최종 <span class="math notranslate nohighlight">\(\theta_m\)</span> 구하기
+<span class="math notranslate nohighlight">\(\theta_m = \theta_{init} + \lambda \star \tau_m\)</span>
+<span class="math notranslate nohighlight">\(\lambda\)</span> 값은 scaling hyperparameter</p>
 </section>
 </section>
 </section>
