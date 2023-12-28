@@ -1,0 +1,714 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Description &#8212; 논문 리뷰 스터디 - NLP, RL, CV</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_posts/paper-review/Ties-Merging';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="&lt;no title&gt;" href="materials/tiesmerging/Pasted.html" />
+    <link rel="prev" title="Ask Me Anything: A simple strategy for prompting language models" href="Ask_Me_Anything.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">논문 리뷰 스터디 - NLP, RL, CV</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    인트로
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Review</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Active_Retrieval_Augmented_Generation.html">Active Retrieval Augmented Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Ask_Me_Anything.html">Ask Me Anything: A simple strategy for prompting language models</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Description</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="sample_page.html">SAMPLE TITLE</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/Paper-review-study" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/Paper-review-study/issues/new?title=Issue%20on%20page%20%2F_posts/paper-review/Ties-Merging.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/_posts/paper-review/Ties-Merging.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Description</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Description</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">간단 요약</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#weight-merging">Weight Merging</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameter">1) 중복 parameter로 인한 간섭 발생</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sign-disagreement">2) Sign disagreement로 인한 간섭 발생</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#related-work">Related Work</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-fusion">Model Fusion</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#method-ties-merging-trim-elect-sign-merge">Method: Ties-Merging (Trim, Elect Sign &amp; Merge)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">상세</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definition">definition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">구현</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#experiments">Experiments</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">분석</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion">Discussion</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="description">
+<h1>Description<a class="headerlink" href="#description" title="Permalink to this heading">#</a></h1>
+<section id="id1">
+<h2>간단 요약<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li></li>
+</ul>
+<hr class="docutils" />
+<ul class="simple">
+<li><p>name: TIES-MERGING: Resolving Interference When Merging Models</p></li>
+<li><p>link: <a class="reference external" href="https://arxiv.org/abs/2306.01708">https://arxiv.org/abs/2306.01708</a></p></li>
+<li><p>date: 23.06 (arxiv)</p></li>
+<li><p>code: <a class="github reference external" href="https://github.com/prateeky2806/ties-merging">prateeky2806/ties-merging</a></p></li>
+</ul>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h1>
+<p>현재와 같은 1태스크 1모델 시스템의 문제점</p>
+<ol class="arabic simple">
+<li><p>매 태스크마다 새로 학습해야 함</p></li>
+<li><p>이미 학습된 모델은 개선이 어려움
+이 문제점을 해결하기 위해 보통 Multitask Learning이 들어가지만, 1) 모든 태스크에 대한 데이터가 있어야 한다. 2) 데이터 섞는 비율도 중요하다 3) 자연스럽게 데이터가 커지므로 학습 cost도 적지 않다</p></li>
+</ol>
+<p>그래서 등장한 것이..</p>
+<section id="weight-merging">
+<h2>Weight Merging<a class="headerlink" href="#weight-merging" title="Permalink to this heading">#</a></h2>
+<p>일반적으로 모델 병합은 여러 태스크로 튜닝된 모델을 하나로 합쳐 큰 general 모델로 만드는 것을 의미한다. MoE 같은 방식과는 다르게 모델이 하나로 합쳐지기 때문에 저장 용량이 적다는 장점이 있다
+병합은</p>
+<ol class="arabic simple">
+<li><p>weight을 전부 더하거나</p></li>
+<li><p>weight을 average하거나,</p></li>
+<li><p>average할 때 각 weight의 priority를 좀 고려하도록 하거나</p></li>
+</ol>
+<p>등등이 있다. 자세한 것은 위의 서베이를 참조하면 좋을듯</p>
+<p>어쨌든 위의 방식들은 결과적으로 weight를 섞는 것이기 때문에 서로 다른 모델 사이에 간섭이 생기는 경우, 성능 저해를 야기할 수 있다.</p>
+<p>이 논문에서는 이 <strong>간섭</strong>의 원인에 대해서 우선 분석하고 있다.
+![image](materials/tiesmerging/Pasted image 20231226175559.png)</p>
+<section id="parameter">
+<h3>1) 중복 parameter로 인한 간섭 발생<a class="headerlink" href="#parameter" title="Permalink to this heading">#</a></h3>
+<p>(양측 그림의 동그라미 부분)
+동일한 parameter에서 한 모델은 중요한 값(보라색)으로 표기했는데 다른 모델은 그렇지 않은 값(분홍색)으로 표기한 경우, 보라 값이 묻히게 된다(오렌지색)</p>
+</section>
+<section id="sign-disagreement">
+<h3>2) Sign disagreement로 인한 간섭 발생<a class="headerlink" href="#sign-disagreement" title="Permalink to this heading">#</a></h3>
+<p>동일한 parameter에서 한 모델은 양수(보라색), 한 모델은 음수(분홍색)으로 마킹하는 경우, 두 값의 평균은 원 값보다는 자연히 줄어들게 된다.</p>
+<p>두 원인 모두 전체적으로 모델 간의 간섭으로 인해 **유의미한 값의 차이가 사라지게 된다(smoothing)**는 결론을 가리킨다.</p>
+</section>
+</section>
+<section id="related-work">
+<h2>Related Work<a class="headerlink" href="#related-work" title="Permalink to this heading">#</a></h2>
+<section id="model-fusion">
+<h3>Model Fusion<a class="headerlink" href="#model-fusion" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>survey: Deep Model Fusion (2023, arxiv) 를 참고
+이 논문에서는 퓨전 방식을 대략 4가지로 구분하고 있음</p></li>
+</ul>
+<ol class="arabic simple">
+<li><p>Model Connectivity: weight interpolation (interpolation함수를 학습)</p></li>
+<li><p>Alignment: A모델을 B모델에 맞게 최대한 align한 뒤 average</p></li>
+<li><p>Weight Merging: aA + bB + …</p></li>
+<li><p>Ensemble</p></li>
+</ol>
+<p>이 논문은 Task Arithmetic이라는 Weight Merging 기법을 발전시킴. 여기서 task vector라는 개념이 나오는데, 이는 튜닝된 모델과 기존 모델과의 차이(task space로 향하는 방향)를 나타냄. 두 벡터를 잘 조합하면 모델을 general space로 향하게 할 수 있다는 가정.</p>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="method-ties-merging-trim-elect-sign-merge">
+<h1>Method: Ties-Merging (Trim, Elect Sign &amp; Merge)<a class="headerlink" href="#method-ties-merging-trim-elect-sign-merge" title="Permalink to this heading">#</a></h1>
+<p>![image](materials/tiesmerging/Pasted image 20231227073512.png)</p>
+<p>각각의 모델 parameter값들을 $<span class="math notranslate nohighlight">\(\theta_{t}, t \in [1...n]\)</span><span class="math notranslate nohighlight">\( 라고 할 때, task vector는 모델의 초기 parameter값 \)</span><span class="math notranslate nohighlight">\(\theta_{init}\)</span><span class="math notranslate nohighlight">\( 과 각각의 \)</span><span class="math notranslate nohighlight">\(\theta_t\)</span>$ 간의 차로 정의된다.</p>
+<p>이 task vector를 통해 최종 모델 parameter 값인 $<span class="math notranslate nohighlight">\(\theta_{m}\)</span>$을 만드는 것이 목적</p>
+<p>간단히 설명하면</p>
+<ol class="arabic simple">
+<li><p>top-k로 각각의 task vector 값을 자르고</p></li>
+<li><p>벡터 방향을 다수결로 결정하고</p></li>
+<li><p>그 방향에 해당되는 벡터값들을 합쳐서 최종 task vector를 만들고</p></li>
+<li><p>최종 vector로 $<span class="math notranslate nohighlight">\(\theta_m\)</span>$ 만들기 뿅</p></li>
+</ol>
+<p>1)에서 top-k로 값을 잘라 버리면 모델의 성능이 떨어지지 않을까?라는 의문에 대한 실험
+![image](materials/tiesmerging/Pasted image 20231227144949.png)</p>
+<section id="id2">
+<h2>상세<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<section id="definition">
+<h3>definition<a class="headerlink" href="#definition" title="Permalink to this heading">#</a></h3>
+<ul>
+<li><p>task vector: $<span class="math notranslate nohighlight">\(\tau_{t} = \theta_{t} - \theta_{init}\)</span>$</p></li>
+<li><p>sign vector: $<span class="math notranslate nohighlight">\(\gamma_{t} = sgn(\tau_t), sgn(x) \star |x| = x\)</span>$</p></li>
+<li><p>magnitude vector: $<span class="math notranslate nohighlight">\(\mu_t = |\tau_t|\)</span>$</p></li>
+<li><div class="math notranslate nohighlight">
+\[\tau_t = \mu_t \odot \gamma_t\]</div>
+</li>
+</ul>
+</section>
+<section id="id3">
+<h3>구현<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
+<ol class="arabic">
+<li><p>Trim</p>
+<ul>
+<li><p>각각의 모델에 대하여 top-k의 task value만 유지</p></li>
+<li><div class="math notranslate nohighlight">
+\[\hat{\tau_t} = \text{keep\_topk\_reset\_rest\_to\_zero}(\tau_t, k)\]</div>
+</li>
+</ul>
+</li>
+<li><p>Elect Sign
+전체 task vector의 magnitude가 커지는 방향으로 sign vector를 재조정
+$<span class="math notranslate nohighlight">\(\gamma_m = sgn(\sum_{t=1}^{n}{\hat{\tau_t}})\)</span>$</p></li>
+<li><p>Disjoint Merge
+위에서 계산한 sign vector 방향의 모든 magnitude를 average
+$<span class="math notranslate nohighlight">\(\mathcal{A}^p = \left\{ t \in [n] | \hat{\gamma_t^p} = \gamma_m^p \right\}\)</span>$</p></li>
+</ol>
+<p>마지막으로 최종 $<span class="math notranslate nohighlight">\(\theta_m\)</span><span class="math notranslate nohighlight">\( 구하기
+   \)</span><span class="math notranslate nohighlight">\(\theta_m = \theta_{init} + \lambda \star \tau_m\)</span><span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\(\lambda\)</span>$ 값은 scaling hyperparameter</p>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="experiments">
+<h1>Experiments<a class="headerlink" href="#experiments" title="Permalink to this heading">#</a></h1>
+<p>![image](materials/tiesmerging/Pasted image 20231228090116.png)</p>
+<ol class="arabic simple">
+<li><p>다른 방식에 비해 튜닝 시 성능이 좋음
+같은 데이터로 튜닝된 여러 모델들 (e.g. 허깅페이스에 있는 무수히 많은 QA모델)을 사용하는 경우 더 좋은 성능을 낼 수 있음</p></li>
+<li><p>이 모델을 초기 모델로 잡는 경우 튜닝 시 성능도 더 좋아짐</p></li>
+</ol>
+<section id="id4">
+<h2>분석<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<p>![image](materials/tiesmerging/Pasted image 20231228090655.png)</p>
+<ul class="simple">
+<li><p>각각의 효과를 알아보기 위해 trim / elect 중 하나만 써서 실험하였음.</p></li>
+<li><p>좌): 1개일 때랑 1개보다  많을 때랑 비교해도 크게 달라지지 않는다 = 작은 value에 의해 shrink되지 않는다.</p></li>
+<li><p>우): parameter끼리 sign이 갈리더라도 평균 magnitude가 기존보다는 유지됨(보라)</p></li>
+</ul>
+<p>![image](materials/tiesmerging/Pasted image 20231228092204.png)</p>
+<ul class="simple">
+<li><p>top-N / bottom-N 의 sign vector를 특정 확률(x축)로 뒤집어줌.</p></li>
+<li><p>top-N은 반대 방향으로 갈수록 성능이 급격히 떨어진다 (= sign interference를 주의해야 한다 &amp; top-N은 중요하다 &amp; bottom은 쓸다리가 없으니 trim해도 좋다)</p></li>
+</ul>
+<p>![image](materials/tiesmerging/Pasted image 20231228092049.png)</p>
+<ul class="simple">
+<li><p>ablation study.</p></li>
+</ul>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="discussion">
+<h1>Discussion<a class="headerlink" href="#discussion" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>실험이 T5로 진행됨. 실제 llm에서 어떻게 작용하는지는 이 뒤에 나오는 논문인 lm-cocktail을 찾아봐야 할 것으로 보임.</p></li>
+<li><p>현재 가장 많이 쓰이는(open-llm-leaderboard 기준) SLERP방식은 따로 비교하지 않았다는 점? cocktail논문에서는 이걸 다루고 있을 지 궁금</p></li>
+<li><p>실험에서 초기 모델로 썼을 때 성능이 올랐다고 하는 것을 봐서, 지금 나온 solar inst 모델들을 기반으로 하고 거기다가 디피오나 셀프 inst등을 멕이면 더 잘 하지 않을까..? 하는 소소한 의문</p></li>
+</ul>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./_posts/paper-review"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Ask_Me_Anything.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Ask Me Anything: A simple strategy for prompting language models</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="materials/tiesmerging/Pasted.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">&lt;no title&gt;</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Description</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">간단 요약</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#weight-merging">Weight Merging</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameter">1) 중복 parameter로 인한 간섭 발생</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sign-disagreement">2) Sign disagreement로 인한 간섭 발생</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#related-work">Related Work</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-fusion">Model Fusion</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#method-ties-merging-trim-elect-sign-merge">Method: Ties-Merging (Trim, Elect Sign &amp; Merge)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">상세</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definition">definition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">구현</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#experiments">Experiments</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">분석</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion">Discussion</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By 김진겸/민예린/전은영/정유진
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
