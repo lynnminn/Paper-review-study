@@ -413,16 +413,15 @@ document.write(`
 </ul>
 </li>
 </ul>
-<img src="./materials/FLARE/Architecture.png" alt="FLARE 구조" width="1000" >
+<p><img alt="architecture" src="../../_images/Architecture.png" /></p>
 </section>
 <section id="background">
 <h2>Background<a class="headerlink" href="#background" title="Permalink to this heading">#</a></h2>
 </section>
 <section id="rag-retrieval-augment-generation">
 <h2>기본 RAG(Retrieval-Augment Generation) 구조<a class="headerlink" href="#rag-retrieval-augment-generation" title="Permalink to this heading">#</a></h2>
-<ul>
-<li><img src="./materials/FLARE/RAG.png" widht=800>
-</li>
+<p><img alt="RAG" src="../../_images/RAG.png" /></p>
+<ul class="simple">
 <li><p>간단하게 말하자면 LLM에 사용자의 질문을 넣어서 답을 구할때 사용자의 질문만 넣는 것이 아니라 관련된 document를 검색해서 generate 하는 방식</p></li>
 <li><p>자세한 과정</p>
 <ol class="arabic simple">
@@ -461,7 +460,7 @@ document.write(`
 </section>
 <section id="question-decomposition-self-ask">
 <h3>Question-Decomposition(Self-ASK)<a class="headerlink" href="#question-decomposition-self-ask" title="Permalink to this heading">#</a></h3>
-<img src="./materials/FLARE/self-ask.png" width=800>
+<p><img alt="self-ask" src="../../_images/self-ask.png" /></p>
 <ul class="simple">
 <li><p>질문을 분해해서 Multi-hop 질문을 할 수 있도록…</p></li>
 <li><p><strong>단점</strong>: Problem (task)에 따라서 대응 /  prompt engineering 을 진행해야함</p>
@@ -524,7 +523,7 @@ document.write(`
 <p>검색 Query 생성 방법</p>
 <ul class="simple">
 <li><p>이것도 임계값 기준으로 (<span class="math notranslate nohighlight">\(\beta\)</span>)
-<img src="./materials/FLARE/make_query.png"></p></li>
+<img alt="make_query" src="../../_images/make_query.png" /></p></li>
 </ul>
 <ol class="arabic simple">
 <li><p>Implicit query</p></li>
@@ -540,14 +539,14 @@ document.write(`
 <ul class="simple">
 <li><p>토큰들 중 임계값보다 낮은 토큰과 llm을 활용해서 새롭게 query를 만들어서 검색에 활용</p></li>
 <li><p>prompt 예시 <br>
-<img src="./materials/FLARE/explict_query.png"></p></li>
+<img alt="explict_query" src="../../_images/explict_query.png" /></p></li>
 </ul>
 </section>
 </section>
 </section>
 <section id="experiment">
 <h2>Experiment<a class="headerlink" href="#experiment" title="Permalink to this heading">#</a></h2>
-<img src="./materials/FLARE/main_result.png">
+<p><img alt="result" src="../../_images/main_result.png" /></p>
 <ul class="simple">
 <li><p>모든 benchmark에서 성능이 개선됨.</p></li>
 <li><p>MultiHopQA에서 가장 크게 개선</p>
