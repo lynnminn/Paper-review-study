@@ -56,15 +56,15 @@
 # Method: Ties-Merging (Trim, Elect Sign & Merge)
 ![image](materials/tiesmerging/Pasted image 20231227073512.png)
 
-각각의 모델 parameter값들을 $$\theta_{t}, t \in [1...n]$$ 라고 할 때, task vector는 모델의 초기 parameter값 $$\theta_{init}$$ 과 각각의 $$\theta_t$$ 간의 차로 정의된다.
+각각의 모델 parameter값들을 $\theta_{t}, t \in [1...n]$ 라고 할 때, task vector는 모델의 초기 parameter값 $\theta_{init}$ 과 각각의 $\theta_t$ 간의 차로 정의된다.
 
-이 task vector를 통해 최종 모델 parameter 값인 $$\theta_{m}$$을 만드는 것이 목적
+이 task vector를 통해 최종 모델 parameter 값인 $\theta_{m}$을 만드는 것이 목적
 
 간단히 설명하면
 1) top-k로 각각의 task vector 값을 자르고
 2) 벡터 방향을 다수결로 결정하고
 3) 그 방향에 해당되는 벡터값들을 합쳐서 최종 task vector를 만들고
-4) 최종 vector로 $$\theta_m$$ 만들기 뿅
+4) 최종 vector로 $\theta_m$ 만들기 뿅
 
 1)에서 top-k로 값을 잘라 버리면 모델의 성능이 떨어지지 않을까?라는 의문에 대한 실험
 ![image](materials/tiesmerging/Pasted image 20231227144949.png)
@@ -72,29 +72,29 @@
 
 ## 상세
 #### definition
-* task vector: $$\tau_{t} = \theta_{t} - \theta_{init}$$ 
-* sign vector: $$\gamma_{t} = sgn(\tau_t), sgn(x) \star |x| = x$$ 
-* magnitude vector: $$\mu_t = |\tau_t|$$
-* $$\tau_t = \mu_t \odot \gamma_t$$
+* task vector: $\tau_{t} = \theta_{t} - \theta_{init}$ 
+* sign vector: $\gamma_{t} = sgn(\tau_t), sgn(x) \star |x| = x$ 
+* magnitude vector: $\mu_t = |\tau_t|$
+* $\tau_t = \mu_t \odot \gamma_t$
 
 #### 구현
 
 1. Trim
    * 각각의 모델에 대하여 top-k의 task value만 유지
-   * $$\hat{\tau_t} = \text{keep\_topk\_reset\_rest\_to\_zero}(\tau_t, k)$$
+   * $\hat{\tau_t} = \text{keep\_topk\_reset\_rest\_to\_zero}(\tau_t, k)$
 
 2. Elect Sign
    전체 task vector의 magnitude가 커지는 방향으로 sign vector를 재조정
-   $$\gamma_m = sgn(\sum_{t=1}^{n}{\hat{\tau_t}})$$
+   $\gamma_m = sgn(\sum_{t=1}^{n}{\hat{\tau_t}})$
 
 3. Disjoint Merge
    위에서 계산한 sign vector 방향의 모든 magnitude를 average
-   $$\mathcal{A}^p = \left\{ t \in [n] | \hat{\gamma_t^p} = \gamma_m^p \right\}$$
+   $\mathcal{A}^p = \left\{ t \in [n] | \hat{\gamma_t^p} = \gamma_m^p \right\}$
    
 
-마지막으로 최종 $$\theta_m$$ 구하기
-   $$\theta_m = \theta_{init} + \lambda \star \tau_m$$
-$$\lambda$$ 값은 scaling hyperparameter
+마지막으로 최종 $\theta_m$ 구하기
+   $\theta_m = \theta_{init} + \lambda \star \tau_m$
+$\lambda$ 값은 scaling hyperparameter
 
 
 # Experiments
