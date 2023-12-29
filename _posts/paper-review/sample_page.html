@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>SAMPLE TITLE &#8212; 논문 리뷰 스터디 - NLP, RL, CV</title>
+    <title>Value Memory Graph: A Graph-Structured word model for offline reinforcement learning &#8212; 논문 리뷰 스터디 - NLP, RL, CV</title>
   
   
   
@@ -62,6 +62,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_posts/paper-review/sample_page';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -170,7 +172,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">SAMPLE TITLE</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Value Memory Graph: A Graph-Structured word model for offline reinforcement learning</a></li>
 </ul>
 
     </div>
@@ -343,7 +345,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -354,11 +358,29 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>SAMPLE TITLE</h1>
+    <h1>Value Memory Graph: A Graph-Structured word model for offline reinforcement learning</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">1. Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#value-memory-graph-vmg">3. Value Memory Graph (VMG)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vmg-metric-space-learning">3.1 VMG Metric space learning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#construct-the-graph-in-vmg">3.2 Construct the graph in VMG</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#define-a-graph-based-mdp">3.3 Define a graph-based MDP</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-use-vmg">3.4 How to use VMG</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#experiments">4. Experiments</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#future-works">5. Future works</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#appendix">Appendix</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -368,9 +390,232 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="sample-title">
-<h1>SAMPLE TITLE<a class="headerlink" href="#sample-title" title="Permalink to this heading">#</a></h1>
-<p>SAMPLE</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="value-memory-graph-a-graph-structured-word-model-for-offline-reinforcement-learning">
+<h1>Value Memory Graph: A Graph-Structured word model for offline reinforcement learning<a class="headerlink" href="#value-memory-graph-a-graph-structured-word-model-for-offline-reinforcement-learning" title="Permalink to this heading">#</a></h1>
+<blockquote>
+<div><p>Editor: <a class="reference external" href="https://www.linkedin.com/in/yerinmin/">민예린 (Yerin Min)</a><br />
+<a class="reference external" href="https://arxiv.org/pdf/2206.04384.pdf"><img alt="arXiv" src="https://img.shields.io/badge/arXiv-2206.04384-b31b1b.svg" /></a>
+<a class="reference external" href="https://github.com/TsuTikgiau/ValueMemoryGraph"><img alt="Github" src="https://img.shields.io/badge/GitHub-181717?logo=github&amp;logoColor=white" /></a></p>
+</div></blockquote>
+<section id="introduction">
+<h2>1. Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>사람이 의사 결정을 할 때는 일반적으로 사소한 정보는 무시하고 중요한 정보에 더 집중함으로써 어려운 문제를 단순화함.</p>
+<ul>
+<li><p>일반적으로 RL methods는 original environment 에서 직접 상호작용하며 policy를 학습함.</p></li>
+<li><p>그러나 robotics나 video games과 같이 long temporal horizons/sparse reward signal/large and continuous state-action space를 가지는 복잡한 환경에서는 기존 RL methods를 이용하여 state 나 action의 가치를 잘 추정하고 well-performing하는 policy를 얻기가 어려움.</p></li>
+<li><p>복잡한 original environment를 단순화하기 위한 <strong>world model</strong>을 학습하여 policy training <strong>난이도를 낮추면서 더 좋은 성능</strong>을 기대할 수 있음.</p></li>
+</ul>
+</li>
+<li><p>이와 같은 **world model 이 본 논문에서 제안하는 Value Memory Graph(VMG)**임.</p>
+<ul>
+<li><p>VMG는 특히 Offline RL을 위한 graph-structured world model로, original environment 를 추상화할 수 있는 graph-based MDP를 의미함.</p>
+<ul>
+<li><p>Offline RL은 미리 수집된 episodes dataset 을 활용하여 policy를 학습하는 방법론임.</p></li>
+<li><p>episode는 original environment의 dynamic information을 포함하고 있기 때문에, offline dataset을 활용하여 offline RL environment의 추상화를 직접 학습하는 것도 가능함.</p></li>
+</ul>
+</li>
+<li><p>VMG를 먼저 학습한 후에 RL methods에 적용하는 방식으로 환경 대체제로서의 기능을 함.</p></li>
+</ul>
+</li>
+<li><p>본 방법론의 contributions는 4가지가 있음.</p></li>
+</ul>
+<p><img alt="overview" src="../../_images/img_1.png" /></p>
+<ol class="arabic simple">
+<li><p>VMG는 offline RL 에서의 graph-structured world model임. VMG는 상태적으로 작고 discrete 한 action과 state space를 가진 graph-based MDP로 original environments를 표현함.</p></li>
+<li><p>contrastive learning 과 state 병합을 통해 offline dataset 에서 VMG를 학습하고 구축하는 방법을 디자인함.</p></li>
+<li><p>본 논문은 VMG 기반의 방법으로 value iteration을 통해 높은 미래 가치를 가지는 graph actions을 추론하고, 이를 action translator를 통해 실제 action으로 변환하여 agents를 control함.</p></li>
+<li><p>D4RL 벤치마크 실험 결과, VMG는 sparse reward와 long temporal horizons을 갖는 몇몇 goal-oriented tasks에 대해 SOTA를 능가하는 성능을 보임.</p></li>
+</ol>
+<p>[관련 키워드]
+💡 #Offline RL
+#Hierarchical RL
+#Model based RL
+#Graph from Experience
+#Representation Learning
+<br></p>
+</section>
+<section id="value-memory-graph-vmg">
+<h2>3. Value Memory Graph (VMG)<a class="headerlink" href="#value-memory-graph-vmg" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>VMG를 구축하기 위해서는 먼저 environment states간의 도달 가능성(reachability)를 측정하기 위한 metric space 를 학습함.</p></li>
+<li><p>그런 후 VMG의 backbone으로 dataset의 metric space가 graph에 구축된다고 함.</p></li>
+</ul>
+<p>→ 결론적으로 MDP는 environment의 추상적인 표현 형태로(abstract representation) graph에 정의되게 됨.</p>
+<p><img alt="Untitled" src="../../_images/img_2.png" /></p>
+<section id="vmg-metric-space-learning">
+<h3>3.1 VMG Metric space learning<a class="headerlink" href="#vmg-metric-space-learning" title="Permalink to this heading">#</a></h3>
+<hr class="docutils" />
+<ul class="simple">
+<li><p>VMG는 few time steps이 진행된 후에 어떤 state가 다른 state에 도달할 수 있는지를 나타내는 L2 distance 를 기반의 metric space 에서 구축되어 있음.</p>
+<ul>
+<li><p>metric space 의 embedding 은 아래 그림처럼 Contrastive learning 메커니즘을 기반으로 함.</p></li>
+</ul>
+</li>
+</ul>
+<p><img alt="Untitled" src="../../_images/img_3.png" /></p>
+<ul>
+<li><p>본 논문은 2개의 neural networks를 사용함.</p>
+<ul class="simple">
+<li><p><strong>state encoder</strong> <span class="math notranslate nohighlight">\(E_{nc_s} : S \to f_s\)</span> : original state를 metric space 내 state feature로 변환.</p></li>
+<li><p><strong>action encode</strong>r <span class="math notranslate nohighlight">\(E_{nc_a} : f_s,a \to \Delta f_{s,a}\)</span> : original action을 metric space 내 transition <span class="math notranslate nohighlight">\(\Delta f_{s,a}\)</span> 으로 변환.</p>
+<ul>
+<li><p>action encoder는 current state feature <span class="math notranslate nohighlight">\(f_s\)</span> 에 따라 metric space 내 에서 original action a를  <span class="math notranslate nohighlight">\(\Delta f_{s,a}\)</span>로 변환함.</p></li>
+</ul>
+</li>
+</ul>
+<p>→ <span class="math notranslate nohighlight">\(\tilde{f_{s'}}=f_s+\Delta f_{s,a}\)</span></p>
+</li>
+<li><p>State encoder (contrastive loss)</p>
+<ul>
+<li><p>예측된 next state <span class="math notranslate nohighlight">\(\tilde{f_{s'}}\)</span>가 ground truth <span class="math notranslate nohighlight">\(f_{s'}\)</span>와 가까워지게 학습됨.</p>
+<p><img alt="Untitled" src="../../_images/img_4.png" /></p>
+<ul>
+<li><p>D: L2 Distance</p></li>
+<li><p><span class="math notranslate nohighlight">\(s_{neg,n}\)</span> : n-th negative state</p></li>
+<li><p>m : margin distance. 학습 때 offline dataset에서 <span class="math notranslate nohighlight">\((s_i, a_i,s'_i)\)</span> 가 randomly sampling 되는데, 이때 fixed margin distance가 이용됨.</p>
+<ul class="simple">
+<li><p>모든 다른 next states <span class="math notranslate nohighlight">\(s'_{j|j\not=i}\)</span>를 negative states로 사용하고 <span class="math notranslate nohighlight">\(\tilde{f_{s'_i}}\)</span>가 metric space 에서 최소 m만큼 떨어져 있도록 함.</p></li>
+</ul>
+<p>→ 즉 m을 이용하여 예측된 <span class="math notranslate nohighlight">\(\tilde{f_{s'}}\)</span> 가 ground truth <span class="math notranslate nohighlight">\(f_{s'}\)</span> 외 다른 states와는 최소 marin distance 만큼 멀어지도록 함.</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Action encoder</p>
+<ul class="simple">
+<li><p>action decoder <span class="math notranslate nohighlight">\(Dec_a : f_s, \Delta f_{s,a} \to \tilde{a}\)</span> 를 통해 transition <span class="math notranslate nohighlight">\(\Delta f_{s,a}\)</span> 로부터 action reconstruct 함.</p>
+<ul>
+<li><p>이런 conditioned auto-encoder structure는 <span class="math notranslate nohighlight">\(\Delta f_{s,a}\)</span> 가 action을 더 잘 representation 하도록 함.</p></li>
+</ul>
+</li>
+<li><p>또한 인접한 states가 metric space 내에서 더욱 가까워지도록 하기 위해  transition <span class="math notranslate nohighlight">\(\Delta f_{s,a}\)</span>가 margin distance m 보다 클 때 페널티를 부과하는 loss 를 추가함.</p>
+<ul>
+<li><p>. (인접한 상태가 계속 가까운 상태를 유지해야만 agent 의 이동을 쉽게 한다고 하는데 …)</p></li>
+</ul>
+</li>
+</ul>
+<p><img alt="Untitled" src="../../_images/img_5.png" /></p>
+</li>
+<li><p>total training loss는 위 두 losses를 sum 한 형태로 이용함.</p>
+<p><img alt="Untitled" src="../../_images/img_6.png" /></p>
+</li>
+</ul>
+<br>
+</section>
+<section id="construct-the-graph-in-vmg">
+<h3>3.2 Construct the graph in VMG<a class="headerlink" href="#construct-the-graph-in-vmg" title="Permalink to this heading">#</a></h3>
+<hr class="docutils" />
+<p><img alt="Untitled" src="../../_images/img_7.png" /></p>
+<ul>
+<li><p>Graph 구성 방법</p>
+<p><img alt="Untitled" src="../../_images/img_8.png" /></p>
+<ol class="arabic simple">
+<li><p>VMG에서 graph를 구성하기 위해서는 먼저 training data 내에 있는 모든 episode를 directed chains 형태인 metric space 로 맵핑함.</p></li>
+<li><p>그런 후 위 그림 (a) 처럼 state features의 수를 줄이기 위해 episode chains 을 결합함.</p>
+<ul class="simple">
+<li><p>이때 metric space 내에서 distance 를 기반으로 유사한 state feature를 하나의 vertex로 병합.</p></li>
+</ul>
+</li>
+<li><p>metric space 내에서 existing vertices에서 checking state <span class="math notranslate nohighlight">\(s_i\)</span> 까지의 최소 distance 가 주어진 thresh hold <span class="math notranslate nohighlight">\(\gamma_m\)</span> 보다 작은지 확인함.</p>
+<ul class="simple">
+<li><p>만약 vertex set 이 비어 있다면 checking state <span class="math notranslate nohighlight">\(s_i\)</span>를 새로운 vertex <span class="math notranslate nohighlight">\(v_J\)</span>로 설정하고, vertex set <span class="math notranslate nohighlight">\(V\)</span>에 추가함.</p></li>
+<li><p>위 과정을 모든 dataset 에 대해 반복하여 vertex 를 구성함.</p></li>
+</ul>
+</li>
+<li><p>3을 통해 Vertex set <span class="math notranslate nohighlight">\(V\)</span>가 구성되고 나면, 각각의 state <span class="math notranslate nohighlight">\(s_i\)</span>는 metric space 내에서 distance 가 <span class="math notranslate nohighlight">\(\gamma_m\)</span>보다 작은 vertex <span class="math notranslate nohighlight">\(v_j\)</span>로 분류할 수 있음.</p>
+<ul class="simple">
+<li><p>training dataset 에서 each state transition <span class="math notranslate nohighlight">\((s_i,a_i,s'_i)\)</span>는 <span class="math notranslate nohighlight">\(s_i\)</span>에서 <span class="math notranslate nohighlight">\(s'_i\)</span>로 가는 directed connection 으로 표현됨.</p></li>
+<li><p>따라서 original transition 으로부터 graph directed edges를 생성함.
+<br></p></li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+</section>
+<section id="define-a-graph-based-mdp">
+<h3>3.3 Define a graph-based MDP<a class="headerlink" href="#define-a-graph-based-mdp" title="Permalink to this heading">#</a></h3>
+<hr class="docutils" />
+<ul>
+<li><p>graph reward</p>
+<p><img alt="Untitled" src="../../_images/img_9.png" />
+<br></p>
+</li>
+</ul>
+</section>
+<section id="how-to-use-vmg">
+<h3>3.4 How to use VMG<a class="headerlink" href="#how-to-use-vmg" title="Permalink to this heading">#</a></h3>
+<hr class="docutils" />
+<ul class="simple">
+<li><p>VMG는 action translator 로 environment actions을 생성하여 episode 의 returns를 최대화하는 agent 를 생성할 수 있음.</p>
+<ul>
+<li><p>classical RL 방법인 value iteration을 통해 각 graph state <span class="math notranslate nohighlight">\(v_j\)</span>의 value <span class="math notranslate nohighlight">\(V(v_j)\)</span>를 계산함.</p>
+<ul>
+<li><p>이때 VMG의 finite and discrete state-action spaces로 인하여, 학습하지 않고 1초 이내에 value 를 계산할 수 있다고 함.</p></li>
+</ul>
+</li>
+<li><p>agent가 좋은 행동을 취하도록 VMG는 각 time step에서 high-value graph states로 이어지는 graph action을 제공함.</p>
+<ul>
+<li><p>하지만 offline dataset 과 environment 간의 distribution shift 로 인하여 VMG와 실제 environment 사이에는 차이가 존재할 수 있고,</p></li>
+<li><p>VMG에서 직접 value iteration을 통하여 계산된 최적의 graph action은 original environment에서는 최적이 아닐 수도 있음.</p></li>
+</ul>
+</li>
+<li><p>따라서 <strong>본 논문의 저자들은</strong> greedy next state value가 큰 graph actions을 선택하는 대신, <strong>먼저 여러 단계를 서치한 후에 좋은 future state를 찾고 path 를 planning 하는 것이 더 안정적인 성능을 보장한다는 것을 깨달았다고 함.</strong></p></li>
+</ul>
+</li>
+</ul>
+<p><img alt="Untitled" src="../../_images/img_10.png" /></p>
+<ul class="simple">
+<li><p>Policy Execution</p>
+<ul>
+<li><p>주어진 current environment state <span class="math notranslate nohighlight">\(s_c\)</span>에서 인접한 graph state <span class="math notranslate nohighlight">\(v_c\)</span>를 찾고,</p></li>
+<li><p><span class="math notranslate nohighlight">\(v_c\)</span>로부터 시작하는 search를 통해 best value 를 가지는 future graph state <span class="math notranslate nohighlight">\(v^*\)</span>를 찾음.</p></li>
+<li><p>그리고 <span class="math notranslate nohighlight">\(v_c\)</span>에서 <span class="math notranslate nohighlight">\(v^*\)</span>로 가는 shorted path <span class="math notranslate nohighlight">\(P=[v_c, v_{c+1}, ..., v^*]\)</span>를 Dijkstra algorithm으로 Planning 함.</p></li>
+<li><p><span class="math notranslate nohighlight">\(N_{sg}\)</span>-th graph state <span class="math notranslate nohighlight">\(v_c +N_{sg}\)</span> 를 선택하고, searched graph action인 edge <span class="math notranslate nohighlight">\(e_{c \to c+N_{sg}}\)</span>를 생성함.</p></li>
+<li><p>action translator를 이용해 graph action <span class="math notranslate nohighlight">\(e_{c \to c+N_{sg}}\)</span>를 environment action <span class="math notranslate nohighlight">\(a_c\)</span>로 변환함.</p>
+<ul>
+<li><p>action translator는 offline dataset 을 이용하여 surpervised learning 으로 학습함.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="experiments">
+<h2>4. Experiments<a class="headerlink" href="#experiments" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>D4RL 벤치마크를 활용한 실험</p></li>
+</ul>
+<p><img alt="Untitled" src="../../_images/img_11.png" /></p>
+</section>
+<section id="future-works">
+<h2>5. Future works<a class="headerlink" href="#future-works" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>환경 구조의 다양한 수준을 모델링하기 위해, 계층적인 그래프 구축은 환경을 더 잘 표현할 수 있는 방법이 될 것 같음.</p>
+<ul>
+<li><p>예를 들어, 로봇이 요리를 할 때 야채 세척, 컷팅 등 단계별 작업을 진행하야 하는 경우 계측적인 구조가 유용할 것으로 예상.</p></li>
+</ul>
+</li>
+<li><p>지속적으로 그래프를 확장하고 새로운 정보를 포함하기 위한 메카니즘이 필요함.</p></li>
+<li><p>탐색을 보다 효과적으로 하기 위해 MCTS를 사용하면 도움이 될 것 같음.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="appendix">
+<h2>Appendix<a class="headerlink" href="#appendix" title="Permalink to this heading">#</a></h2>
+<p><img alt="Untitled" src="../../_images/img_12.png" /></p>
+<ul>
+<li><p>hyper-params setting</p>
+<p><img alt="Untitled" src="../../_images/img_13.png" /></p>
+</li>
+<li><p>influence of margin distance</p>
+<p><img alt="Untitled" src="../../_images/img_14.png" /></p>
+</li>
+</ul>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -418,6 +663,30 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">1. Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#value-memory-graph-vmg">3. Value Memory Graph (VMG)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vmg-metric-space-learning">3.1 VMG Metric space learning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#construct-the-graph-in-vmg">3.2 Construct the graph in VMG</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#define-a-graph-based-mdp">3.3 Define a graph-based MDP</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-use-vmg">3.4 How to use VMG</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#experiments">4. Experiments</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#future-works">5. Future works</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#appendix">Appendix</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
