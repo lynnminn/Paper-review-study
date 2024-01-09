@@ -7,11 +7,11 @@
     - 또한 임계점 방식을 사용하는데 이를 위해서 데이터셋마다 추가 실험이 필요함
     - 일반적인 QA short-answer에 대해서도 성능이 좋아졌는지에 관한 실험은 진행하지 않음.
 
-<img src="./materials/FLARE/Architecture.png" alt="FLARE 구조" width="1000" >
+![architecture](./materials/FLARE/Architecture.png)
 
 ## Background
 ## 기본 RAG(Retrieval-Augment Generation) 구조
-- <img src="./materials/FLARE/RAG.png" widht=800>
+![RAG](./materials/FLARE/RAG.png)
 
 - 간단하게 말하자면 LLM에 사용자의 질문을 넣어서 답을 구할때 사용자의 질문만 넣는 것이 아니라 관련된 document를 검색해서 generate 하는 방식
 - 자세한 과정
@@ -37,7 +37,7 @@
 - **단점**: 이전에 생성된 토큰을 기준으로 검색을 진행하기때문에 LLM이 향후 생성하고자 하는걸 반영 X
 
 ### Question-Decomposition(Self-ASK)
-<img src="./materials/FLARE/self-ask.png" width=800>
+![self-ask](./materials/FLARE/self-ask.png)
 
 - 질문을 분해해서 Multi-hop 질문을 할 수 있도록…
 - **단점**: Problem (task)에 따라서 대응 /  prompt engineering 을 진행해야함
@@ -77,7 +77,7 @@ Confidence 계산 방법
 
 검색 Query 생성 방법
 - 이것도 임계값 기준으로 ($\beta$)
-<img src="./materials/FLARE/make_query.png">
+![make_query](./materials/FLARE/make_query.png)
 1) Implicit query
 - 토큰들 중 임계값보다 낮은 토큰을 마스킹하고 검색에 활용
 - 계산 식 <br>
@@ -86,10 +86,10 @@ Confidence 계산 방법
 2) explicit query
 - 토큰들 중 임계값보다 낮은 토큰과 llm을 활용해서 새롭게 query를 만들어서 검색에 활용
 - prompt 예시 <br>
-   <img src="./materials/FLARE/explict_query.png">
+  ![explict_query](./materials/FLARE/explict_query.png)
 
 ## Experiment
-<img src="./materials/FLARE/main_result.png">
+![result](./materials/FLARE/main_result.png)
 
 - 모든 benchmark에서 성능이 개선됨.
 - MultiHopQA에서 가장 크게 개선
