@@ -1,6 +1,6 @@
 # Ask Me Anything: A simple strategy for prompting language models
 [![arXiv](https://img.shields.io/badge/arXiv-2210.02441-b31b1b.svg)](https://arxiv.org/abs/2210.02441)
-[![Hugging Face Spaces](https://img.shields.io/badge/GitHub-181717?logo=github&logoColor=white)](https://github.com/HazyResearch/ama_prompting)
+[![GitHub](https://img.shields.io/badge/GitHub-181717?logo=github&logoColor=white)](https://github.com/HazyResearch/ama_prompting)
 
 ### 키워드
 - ICLR 2023 top 25%
