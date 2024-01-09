@@ -29,7 +29,7 @@
   - Temporal attention
   </br>: 차원 축 순서 바꾸기 for 시간 축을 고려한 attention 계산 
   </br> i.e. $[b,\; t,\; h*w,\; c]$ -> $[\mathbf{b*h*w},\; \mathbf{t},\; c]$
-- 기존 방식의 문제점인 레퍼런스 이미지 구도 의존성을 줄이는 새로운 attention 결합 방식 제안
+- 레퍼런스 이미지의 디테일을 잘 반영하는 새로운 attention 결합 방식 제안
   </br> => Spatial Attention Layer
 
   ![attention_aggregation](./materials/AnimateAnyone/attention_aggregation.png)
