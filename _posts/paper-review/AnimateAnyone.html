@@ -430,7 +430,7 @@ document.write(`
 <li><p>Spatial-Attention, Cross-Attention, Temporal-Attention 사용</p></li>
 </ul>
 </li>
-<li><p>(2D) SD 사용하기 위해 텐서의 (차원 축을 늘리는) repeat, (차원 축을 바꾸는) transpose, (차원 축을 합치는) reshape를 활용</p>
+<li><p>SD 사용하기 위해 텐서의 (차원 축을 늘리는) repeat, (차원 축의 순서를 바꾸는) transpose, (차원 축을 합치는) reshape를 활용</p>
 <ul class="simple">
 <li><p>Spatial attention
 </br>: 차원 축 늘리기 for 2D -&gt; 3D 데이터 ,
@@ -439,7 +439,7 @@ document.write(`
 </br>: 추가된 차원 축을 batch 차원 축에 합하는 방식 for 3D -&gt; 2D attention
 </br> i.e. <span class="math notranslate nohighlight">\([b,\; t,\; h*w,\; c]\)</span> -&gt; <span class="math notranslate nohighlight">\([\mathbf{b*t},\; h*w,\; c]\)</span></p></li>
 <li><p>Temporal attention
-</br>: 차원 축 바꾸기 for 시간 축을 고려한 attention 계산
+</br>: 차원 축 순서 바꾸기 for 시간 축을 고려한 attention 계산
 </br> i.e. <span class="math notranslate nohighlight">\([b,\; t,\; h*w,\; c]\)</span> -&gt; <span class="math notranslate nohighlight">\([\mathbf{b*h*w},\; \mathbf{t},\; c]\)</span></p></li>
 </ul>
 </li>

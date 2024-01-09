@@ -19,7 +19,7 @@
   - 출력: 레퍼런스 이미지에 포즈 시퀀스를 반영한 $t$ 초 비디오
 - 3 가지 타입의 Attention 사용
   - Spatial-Attention, Cross-Attention, Temporal-Attention 사용
-- (2D) SD 사용하기 위해 텐서의 (차원 축을 늘리는) repeat, (차원 축을 바꾸는) transpose, (차원 축을 합치는) reshape를 활용
+- SD 사용하기 위해 텐서의 (차원 축을 늘리는) repeat, (차원 축의 순서를 바꾸는) transpose, (차원 축을 합치는) reshape를 활용
   - Spatial attention 
   </br>: 차원 축 늘리기 for 2D -> 3D 데이터 , 
   </br> i.e. $[b,\; h*w,\; c]$ -> $[b,\; \mathbf{t},\; h*w,\; c]$
@@ -27,7 +27,7 @@
   </br>: 추가된 차원 축을 batch 차원 축에 합하는 방식 for 3D -> 2D attention
   </br> i.e. $[b,\; t,\; h*w,\; c]$ -> $[\mathbf{b*t},\; h*w,\; c]$
   - Temporal attention
-  </br>: 차원 축 바꾸기 for 시간 축을 고려한 attention 계산 
+  </br>: 차원 축 순서 바꾸기 for 시간 축을 고려한 attention 계산 
   </br> i.e. $[b,\; t,\; h*w,\; c]$ -> $[\mathbf{b*h*w},\; \mathbf{t},\; c]$
 - 기존 방식의 문제점인 레퍼런스 이미지 구도 의존성을 줄이는 새로운 attention 결합 방식 제안
   </br> => Spatial Attention Layer
