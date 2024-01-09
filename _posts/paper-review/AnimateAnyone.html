@@ -62,6 +62,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_posts/paper-review/AnimateAnyone';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -397,10 +399,17 @@ document.write(`
 </section>
 <section id="preview">
 <h2>Preview이자 전부<a class="headerlink" href="#preview" title="Permalink to this heading">#</a></h2>
+<p><img alt="architecture" src="_posts/paper-review/materials/AnimateAnyone/architecture.png" /></p>
 <ul class="simple">
 <li><p>이미지 생성 모델인 stable diffusion(SD)를 활용해서 비디오 생성</p>
 <ul>
 <li><p>이미지는 2D, 비디오는 시간 차원이 추가된 3D</p></li>
+</ul>
+</li>
+<li><p>모델 구조</p>
+<ul>
+<li><p>입력: 포즈 시퀀스(<span class="math notranslate nohighlight">\(t\)</span> 개), 레퍼런스 이미지(<span class="math notranslate nohighlight">\(1\)</span> 개)</p></li>
+<li><p>출력: 레퍼런스 이미지에 포즈 시퀀스를 반영한 <span class="math notranslate nohighlight">\(t\)</span> 초 비디오</p></li>
 </ul>
 </li>
 <li><p>3 가지 타입의 Attention 사용</p>
@@ -408,17 +417,21 @@ document.write(`
 <li><p>Spatial-Attention, Cross-Attention, Temporal-Attention 사용</p></li>
 </ul>
 </li>
-<li><p>SD 사용하기 위해 텐서의 (차원을 늘리는) repeat, (차원 축을 바꾸는) transpose, reshape를 활용</p>
+<li><p>SD 사용하기 위해 텐서의 (차원 축을 늘리는) repeat, (차원 축을 바꾸는) transpose, (차원 축을 합치는) reshape를 활용</p>
 <ul>
-<li><p>Spatial attention : 차원 늘리기 for 2D -&gt; 3D 데이터
-</br> [b, h, w, c] -&gt; [b, <strong>“t”</strong>, h, w, c]</p></li>
-<li><p>Cross attention : 추가된 차원을 batch에 합하는 방식 for 3D -&gt; 2D attention
-</br> [b, t, h, w, c] -&gt; [<strong>“b*t”</strong>, h, w, c]</p></li>
-<li><p>Temporal attention: 차원 축 바꾸기 for 시간 축을 고려한 attention 계산
-</br> [b, t, h, w, c] -&gt; [b, <strong>“c”</strong>, h, w, <strong>“t”</strong>]</p></li>
+<li><p>Spatial attention
+</br>: 차원 축 늘리기 for 2D -&gt; 3D 데이터 ,
+</br> i.e. <span class="math notranslate nohighlight">\([b, h, w, c]\)</span> -&gt; <span class="math notranslate nohighlight">\([b, \bf{t}, h, w, c]\)</span></p></li>
+<li><p>Cross attention
+</br>: 추가된 차원 축을 batch 차원 축에 합하는 방식 for 3D -&gt; 2D attention
+</br> i.e. <span class="math notranslate nohighlight">\([b, t, h, w, c]\)</span> -&gt; <span class="math notranslate nohighlight">\([\bf{b*t}, h, w, c]\)</span></p></li>
+<li><p>Temporal attention
+</br>: 차원 축 바꾸기 for 시간 축을 고려한 attention 계산
+</br> i.e. <span class="math notranslate nohighlight">\([b, t, h, w, c]\)</span> -&gt; <span class="math notranslate nohighlight">\([b, \bf{c}, h, w, \bf{t}]\)</span></p></li>
 </ul>
 </li>
-<li><p>기존 방식의 문제점인 레퍼런스 이미지 구도 의존성을 줄이는 새로운 attention 결합 방식 제안</p></li>
+<li><p>기존 방식의 문제점인 레퍼런스 이미지 구도 의존성을 줄이는 새로운 attention 결합 방식 제안
+<img alt="attention_aggregation" src="_posts/paper-review/materials/AnimateAnyone/attention_aggregation.png%7Cheight=400" /></p></li>
 </ul>
 </section>
 </section>
