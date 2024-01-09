@@ -372,6 +372,19 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">키워드</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preview">Preview이자 전부</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#method">Method</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#referencenet">ReferenceNet</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pose-guider">Pose Guider</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-layer">Temporal Layer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-strategy">Training Strategy</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#experiments">Experiments</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implementations">Implementations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">결과</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -392,7 +405,7 @@ document.write(`
 <section id="id1">
 <h2>키워드<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Image to Video, Stable Diffusion</p></li>
+<li><p>Image to Video, Character Animation, Stable Diffusion</p></li>
 <li><p>Consistent generation</p></li>
 <li><p>Temporal Attention, Spatial Attention</p></li>
 </ul>
@@ -400,39 +413,234 @@ document.write(`
 <section id="preview">
 <h2>Preview이자 전부<a class="headerlink" href="#preview" title="Permalink to this heading">#</a></h2>
 <p><img alt="architecture" src="../../_images/architecture.png" /></p>
-<ul class="simple">
-<li><p>이미지 생성 모델인 stable diffusion(SD)를 활용해서 비디오 생성</p>
 <ul>
+<li><p>이미지 생성 모델인 stable diffusion(SD)를 활용해서 비디오 생성</p>
+<ul class="simple">
 <li><p>이미지는 2D, 비디오는 시간 차원이 추가된 3D</p></li>
 </ul>
 </li>
 <li><p>모델 구조</p>
-<ul>
+<ul class="simple">
 <li><p>입력: 포즈 시퀀스(<span class="math notranslate nohighlight">\(t\)</span> 개), 레퍼런스 이미지(<span class="math notranslate nohighlight">\(1\)</span> 개)</p></li>
 <li><p>출력: 레퍼런스 이미지에 포즈 시퀀스를 반영한 <span class="math notranslate nohighlight">\(t\)</span> 초 비디오</p></li>
 </ul>
 </li>
 <li><p>3 가지 타입의 Attention 사용</p>
-<ul>
+<ul class="simple">
 <li><p>Spatial-Attention, Cross-Attention, Temporal-Attention 사용</p></li>
 </ul>
 </li>
-<li><p>SD 사용하기 위해 텐서의 (차원 축을 늘리는) repeat, (차원 축을 바꾸는) transpose, (차원 축을 합치는) reshape를 활용</p>
-<ul>
+<li><p>(2D) SD 사용하기 위해 텐서의 (차원 축을 늘리는) repeat, (차원 축을 바꾸는) transpose, (차원 축을 합치는) reshape를 활용</p>
+<ul class="simple">
 <li><p>Spatial attention
 </br>: 차원 축 늘리기 for 2D -&gt; 3D 데이터 ,
-</br> i.e. <span class="math notranslate nohighlight">\([b, h, w, c]\)</span> -&gt; <span class="math notranslate nohighlight">\([b, \bf{t}, h, w, c]\)</span></p></li>
+</br> i.e. <span class="math notranslate nohighlight">\([b,\; h*w,\; c]\)</span> -&gt; <span class="math notranslate nohighlight">\([b,\; \mathbf{t},\; h*w,\; c]\)</span></p></li>
 <li><p>Cross attention
 </br>: 추가된 차원 축을 batch 차원 축에 합하는 방식 for 3D -&gt; 2D attention
-</br> i.e. <span class="math notranslate nohighlight">\([b, t, h, w, c]\)</span> -&gt; <span class="math notranslate nohighlight">\([\bf{b*t}, h, w, c]\)</span></p></li>
+</br> i.e. <span class="math notranslate nohighlight">\([b,\; t,\; h*w,\; c]\)</span> -&gt; <span class="math notranslate nohighlight">\([\mathbf{b*t},\; h*w,\; c]\)</span></p></li>
 <li><p>Temporal attention
 </br>: 차원 축 바꾸기 for 시간 축을 고려한 attention 계산
-</br> i.e. <span class="math notranslate nohighlight">\([b, t, h, w, c]\)</span> -&gt; <span class="math notranslate nohighlight">\([b, \bf{c}, h, w, \bf{t}]\)</span></p></li>
+</br> i.e. <span class="math notranslate nohighlight">\([b,\; t,\; h*w,\; c]\)</span> -&gt; <span class="math notranslate nohighlight">\([\mathbf{b*h*w},\; \mathbf{t},\; c]\)</span></p></li>
 </ul>
 </li>
 <li><p>기존 방식의 문제점인 레퍼런스 이미지 구도 의존성을 줄이는 새로운 attention 결합 방식 제안
-<img alt="attention_aggregation" src="_posts/paper-review/materials/AnimateAnyone/attention_aggregation.png%7Cheight=400" /></p></li>
+</br> =&gt; Spatial Attention Layer</p>
+<p><img alt="attention_aggregation" src="../../_images/attention_aggregation.png" /></p>
+</li>
 </ul>
+</section>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>캐릭터 애니메이션(Character Animation)은 레퍼런스 이미지에 포즈를 반영한 비디오를 생성하는 테스크</p></li>
+<li><p>지금까지 일관성(consistency)과 일반성(generalizability)을 동시에 만족하는 방법은 없었음</p>
+<ul>
+<li><p>일관성 문제: 동영상 내에 캐릭터 디테일들이 변함</p></li>
+<li><p>일반성 문제: 기존 방식들 소스 캐릭터 이미지에 대해 파인튜닝함</p></li>
+</ul>
+</li>
+<li><p>일관성과 일반성을 만족하는 AnimateAnyone 제안</p></li>
+<li><p>AnimateAnyone 방법 소개</p>
+<ul>
+<li><p>(3D) Denoising Unet</p>
+<ul>
+<li><p>비디오 생성 모델</p></li>
+<li><p><strong>Temporal layer</strong> 추가</p>
+<ul>
+<li><p>multi-frame inputs을 처리할 수 있는 변형된 SD Unet 구조 사용</p></li>
+</ul>
+</li>
+<li><p><strong>Spatial Attention Layer</strong> 로 self-attention 대체</p>
+<ul>
+<li><p>레퍼런스 이미지 정보 결합 레이어</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>ReferenceNet</strong></p>
+<ul>
+<li><p>for 일관성</p></li>
+<li><p>SD Unet과 동일 구조</p></li>
+<li><p>레퍼런스 이미지의 spatial 정보 추출하고 denoising UNet에 결합하여 학습 =&gt; 레퍼런스 이미지의 디테일들을 더 잘 유지</p></li>
+</ul>
+</li>
+<li><p><strong>Pose Guider</strong></p>
+<ul>
+<li><p>포즈 시퀀스 인코더</p></li>
+<li><p>Pose Guider가 추출한 features에 노이즈를 더해서 모델에 입력 =&gt; 원하는 포즈 반영</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>내부 5K 데이터셋으로 모델 학습하여 SOTA 달성.</p></li>
+</ul>
+</section>
+<section id="method">
+<h2>Method<a class="headerlink" href="#method" title="Permalink to this heading">#</a></h2>
+<p><img alt="architecture" src="../../_images/architecture.png" /></p>
+<ul class="simple">
+<li><p>주요 구성 요소: ReferenceNet, Pose Guider, Temporal Layer</p></li>
+<li><p>모델 구조</p>
+<ul>
+<li><p>입력: 레퍼런스 이미지, <span class="math notranslate nohighlight">\(t\)</span> 초의 포즈 시퀀스</p></li>
+<li><p>출력: <span class="math notranslate nohighlight">\(t\)</span> 초의 비디오</p></li>
+</ul>
+</li>
+<li><p>생성 프로세스</p>
+<ul>
+<li><p>포즈 시퀀스 -&gt; PoseGuider -&gt; 노이즈 더하기 -&gt; N 번 * (Denoising UNet) -&gt; 비디오</p></li>
+<li><p>Denoising UNet에서 레퍼런스 features 사용</p>
+<ul>
+<li><p>레퍼런스 featuers : 레퍼런스 이미지 -&gt; ReferenceNet -&gt; 이미지</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<section id="referencenet">
+<h3>ReferenceNet<a class="headerlink" href="#referencenet" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>기존의 방식들은 SD에 이미지 조건을 반영하기 위해 CLIP 텍스트 인코더를 CLIP 이미지 인코더로 대체하여 사용함.</p></li>
+<li><p><strong>디테일</strong>을 잘 유지 못하는 일관성(consistency)의 문제가 발생</p>
+<ul>
+<li><p>CLIP은 낮은 해상도(224x224)의 이미지로 학습됨, SD는 (512x512) 이미지 생성</p></li>
+<li><p>CLIP 학습 방식이 semantic high-level feature matching 방식, 이미지 디테일 정보 손실 있음.</p></li>
+</ul>
+</li>
+<li><p>레퍼런스 이미지의 디테일 정보를 더 잘 유지하기 위해 <strong>ReferenceNet</strong> 제안</p></li>
+<li><p>ReferenceNet은 CLIP 이미지 인코더를 사용하는 (2D) SD 구조 모델</p>
+<ul>
+<li><p>모델 SD 웨이트로 초기화</p></li>
+</ul>
+</li>
+<li><p><strong>Spatial Attention layer</strong>를 통해 (3D) Denoising UNet에 레퍼런스 features 결합함.
+<img alt="attention_aggregation" src="../../_images/attention_aggregation.png" /></p>
+<ol class="arabic simple">
+<li><p>레퍼런스 features <span class="math notranslate nohighlight">\(t\)</span> 번 repeat</p></li>
+<li><p>Denoising UNet features와 <span class="math notranslate nohighlight">\(w\)</span> 축으로 concat</p></li>
+<li><p>self-attention 수행</p></li>
+<li><p>원래 UNet features에 해당하는 부분의 features만 추출</p></li>
+</ol>
+</li>
+<li><p>장점</p>
+<ol class="arabic simple">
+<li><p>SD의 feature modeling 능력 사용, 좋은 모델 초기화값</p></li>
+<li><p>ReferenceNet과 Denoising UNet이 feature space를 공유해서 학습이 쉬워짐</p></li>
+</ol>
+</li>
+<li><p>ControlNet과의 차이점
+<img alt="controlnet" src="../../_images/controlnet.png" /></p>
+<ul>
+<li><p>논문에서는 ControlNet의 조건(depth, edge)은 위치 align의 목적인데 여기서 레퍼런스 이미지는 위치 align이 목적이 아니기 때문에 적합하지 않다고 한다.</p></li>
+<li><p>방식을 비교하자면</p>
+<ul>
+<li><p>ControlNet은 attention 각자 수행 원래 output + 조건 output, dependent(연산량 2배)</p></li>
+<li><p>AnimateAnyone은 원래 output과 조건 output concat하고 attention 수행한 뒤 원래 부분만 사용, independent(pre-compute 가능)</p></li>
+</ul>
+</li>
+<li><p>번외) 최근 reference 용 ControlNet도 추가 되었다. attention layer에 직접 적용하는 다른 방식</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="pose-guider">
+<h3>Pose Guider<a class="headerlink" href="#pose-guider" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>포즈 조건을 주는 방식으로 ControlNet을 사용할 수 있지만, ControlNet은 연산량 2배됨 (dependent)</p></li>
+<li><p>light-weight 인코더 사용</p></li>
+</ul>
+</section>
+<section id="temporal-layer">
+<h3>Temporal Layer<a class="headerlink" href="#temporal-layer" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Spatial-, Cross- Attention 뒤에 수행</p></li>
+<li><p>layer 자체는 AnimateDiff와 동일</p>
+<ul>
+<li><p>Temporal Attention</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\([b,\; t,\; h*w,\; c]\)</span> -&gt; <span class="math notranslate nohighlight">\([(b*h*w,\; t,\; c)]\)</span> -&gt; <span class="math notranslate nohighlight">\(t\)</span> 축으로 self-attention 수행</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>일관성을 유지한 자연스러운 비디오 생성에 도움</p></li>
+</ul>
+</section>
+<section id="training-strategy">
+<h3>Training Strategy<a class="headerlink" href="#training-strategy" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>2 단계</p>
+<ul>
+<li><p>I stage: 레퍼런스 이미지로 타겟 포즈 생성 학습 (single frame)</p></li>
+<li><p>II stage: 자연스러운 비디오 생성 (multi frames)</p></li>
+</ul>
+</li>
+<li><p>I stage</p>
+<ul>
+<li><p>레퍼런스 이미지로 타겟 포즈 생성 학습 (single frame)</p></li>
+<li><p>레퍼런스 이미지는 비디오 클립에서 랜덤하게 고름</p></li>
+<li><p>학습 : denoising UNet(Temporal layer 배제), ReferenceNet, Pose Guider</p></li>
+<li><p>초기화</p>
+<ul>
+<li><p>denoising UNet, Reference Net: SD로 initialize</p></li>
+<li><p>Pose Guider: Gaussian 초기화, 마지막 projection layer는 zero conv</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>II stage (consistency)</p>
+<ul>
+<li><p>자연스러운 비디오 생성 (multi frames)</p></li>
+<li><p>학습: Temporal layer in denoising UNet</p></li>
+<li><p>초기화: AnimateDiff 모델 값</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="experiments">
+<h2>Experiments<a class="headerlink" href="#experiments" title="Permalink to this heading">#</a></h2>
+<section id="implementations">
+<h3>Implementations<a class="headerlink" href="#implementations" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>자체적으로 5K 캐릭터 비디오 클립 데이터 구축</p></li>
+<li><p>DWPose로 포즈 시퀀스 추출</p></li>
+<li><p>A100 4개 사용</p></li>
+<li><p>I stage: 768x768, center-cropped, 30,000 steps, 64 batch size</p></li>
+<li><p>II stage: 24 frame, 10,000 steps, 4 batch size, 1e-5 lr</p></li>
+</ul>
+</section>
+<section id="id2">
+<h3>결과<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>real, animation 도메인 다 가능
+<img alt="quality" src="../../_images/quality.png" /></p></li>
+<li><p>포즈 더 잘 반영
+<img alt="pose" src="../../_images/pose.png" /></p></li>
+<li><p>레퍼런스 더 잘 반영
+<img alt="reference" src="../../_images/reference.png" /></p></li>
+</ul>
+</section>
 </section>
 </section>
 
@@ -501,6 +709,19 @@ document.write(`
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">키워드</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preview">Preview이자 전부</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#method">Method</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#referencenet">ReferenceNet</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pose-guider">Pose Guider</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-layer">Temporal Layer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-strategy">Training Strategy</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#experiments">Experiments</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implementations">Implementations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">결과</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
