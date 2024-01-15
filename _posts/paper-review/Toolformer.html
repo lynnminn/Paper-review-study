@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Animate Anyone: Consistent and Controllable Image-to-Video Synthesis for Character Animation &#8212; 논문 리뷰 스터디 - NLP, RL, CV</title>
+    <title>Toolformer: Language Models Can Teach Themselves to Use Tools &#8212; 논문 리뷰 스터디 - NLP, RL, CV</title>
   
   
   
@@ -64,11 +64,11 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '_posts/paper-review/AnimateAnyone';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_posts/paper-review/Toolformer';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Ask Me Anything: A simple strategy for prompting language models" href="Ask_Me_Anything.html" />
-    <link rel="prev" title="Active Retrieval Augmented Generation" href="Active_Retrieval_Augmented_Generation.html" />
+    <link rel="next" title="Value Memory Graph: A Graph-Structured word model for offline reinforcement learning" href="sample_page.html" />
+    <link rel="prev" title="Ties-Merging" href="Ties-Merging.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -167,14 +167,14 @@ const thebe_selector_output = ".output, .cell_output"
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Review</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Active_Retrieval_Augmented_Generation.html">Active Retrieval Augmented Generation</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Animate Anyone: Consistent and Controllable Image-to-Video Synthesis for Character Animation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AnimateAnyone.html">Animate Anyone: Consistent and Controllable Image-to-Video Synthesis for Character Animation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Ask_Me_Anything.html">Ask Me Anything: A simple strategy for prompting language models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Ties-Merging.html">Ties-Merging</a></li>
 
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="Toolformer.html">Toolformer: Language Models Can Teach Themselves to Use Tools</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Toolformer: Language Models Can Teach Themselves to Use Tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sample_page.html">Value Memory Graph: A Graph-Structured word model for offline reinforcement learning</a></li>
 </ul>
 
@@ -247,7 +247,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/executablebooks/Paper-review-study/issues/new?title=Issue%20on%20page%20%2F_posts/paper-review/AnimateAnyone.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/executablebooks/Paper-review-study/issues/new?title=Issue%20on%20page%20%2F_posts/paper-review/Toolformer.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -277,7 +277,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../../_sources/_posts/paper-review/AnimateAnyone.md" target="_blank"
+      <li><a href="../../_sources/_posts/paper-review/Toolformer.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -361,7 +361,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Animate Anyone: Consistent and Controllable Image-to-Video Synthesis for Character Animation</h1>
+    <h1>Toolformer: Language Models Can Teach Themselves to Use Tools</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -371,21 +371,17 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">키워드</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preview">Preview이자 전부</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#method">Method</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#referencenet">ReferenceNet</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pose-guider">Pose Guider</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-layer">Temporal Layer</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-strategy">Training Strategy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-api-calls">1. Sample API Calls</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#execute-api-calls">2. Execute API Calls</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#filter-api-calls">3. Filter API Calls</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#finetune-llm-with-augmented-dataset-with-api-calls">4. Finetune LLM with augmented dataset(with API calls)</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#experiments">Experiments</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implementations">Implementations</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">결과</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#experiment">Experiment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
 </ul>
             </nav>
         </div>
@@ -397,251 +393,149 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="animate-anyone-consistent-and-controllable-image-to-video-synthesis-for-character-animation">
-<h1>Animate Anyone: Consistent and Controllable Image-to-Video Synthesis for Character Animation<a class="headerlink" href="#animate-anyone-consistent-and-controllable-image-to-video-synthesis-for-character-animation" title="Permalink to this heading">#</a></h1>
-<p><a class="reference external" href="https://arxiv.org/pdf/2311.17117.pdf"><img alt="arXiv" src="https://img.shields.io/badge/arXiv-2210.02441-b31b1b.svg" /></a>
-<a class="reference external" href="https://github.com/HumanAIGC/AnimateAnyone?tab=readme-ov-file"><img alt="Github" src="https://img.shields.io/badge/GitHub-181717?logo=github&amp;logoColor=white" /></a></p>
-<p><img alt="result_example" src="../../_images/result.gif" />
-<a class="reference external" href="https://www.aitimes.com/news/articleView.html?idxno=155678">출처</a></p>
-<section id="id1">
-<h2>키워드<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+  <section class="tex2jax_ignore mathjax_ignore" id="toolformer-language-models-can-teach-themselves-to-use-tools">
+<h1>Toolformer: Language Models Can Teach Themselves to Use Tools<a class="headerlink" href="#toolformer-language-models-can-teach-themselves-to-use-tools" title="Permalink to this heading">#</a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Image to Video, Character Animation, Stable Diffusion</p></li>
-<li><p>Consistent generation</p></li>
-<li><p>Temporal Attention, Spatial Attention</p></li>
-</ul>
-</section>
-<section id="preview">
-<h2>Preview이자 전부<a class="headerlink" href="#preview" title="Permalink to this heading">#</a></h2>
-<p><img alt="architecture" src="../../_images/architecture.png" /></p>
+<li><p>Meta AI 2022</p></li>
+<li><p>공식 구현 X</p></li>
+<li><p>LLM(GPT-J, 6B)가 언제/어떤 API를 어떻게 호출할지 스스로 결정하는 방법</p></li>
+<li><p><strong>self-supervised</strong> 방식으로 데이터를 쉽게 생성함</p></li>
+<li><p>총 5가지의 Tool(API)를 사용</p>
 <ul>
-<li><p>이미지 생성 모델인 stable diffusion(SD)를 활용해서 비디오 생성</p>
-<ul class="simple">
-<li><p>이미지는 2D, 비디오는 시간 차원이 추가된 3D</p></li>
+<li><p>QA(RAG), Wikipedia Search, Calculator, Calendar, MT(Machine Translation)
+<img alt="Toolformer" src="../../_images/example.png" /></p></li>
 </ul>
-</li>
-<li><p>모델 구조</p>
-<ul class="simple">
-<li><p>입력: 포즈 시퀀스(<span class="math notranslate nohighlight">\(t\)</span> 개), 레퍼런스 이미지(<span class="math notranslate nohighlight">\(1\)</span> 개)</p></li>
-<li><p>출력: 레퍼런스 이미지에 포즈 시퀀스를 반영한 <span class="math notranslate nohighlight">\(t\)</span> 초 비디오</p></li>
-</ul>
-</li>
-<li><p>3 가지 타입의 Attention 사용</p>
-<ul class="simple">
-<li><p>Spatial-Attention, Cross-Attention, Temporal-Attention 사용</p></li>
-</ul>
-</li>
-<li><p>SD 사용하기 위해 텐서의 (차원 축을 늘리는) repeat, (차원 축의 순서를 바꾸는) transpose, (차원 축을 합치는) reshape를 활용</p>
-<ul class="simple">
-<li><p>Spatial attention
-</br>: 차원 축 늘리기 for 2D -&gt; 3D 데이터 ,
-</br> i.e. <span class="math notranslate nohighlight">\([b,\; h*w,\; c]\)</span> -&gt; <span class="math notranslate nohighlight">\([b,\; \mathbf{t},\; h*w,\; c]\)</span></p></li>
-<li><p>Cross attention
-</br>: 추가된 차원 축을 batch 차원 축에 합하는 방식 for 3D -&gt; 2D attention
-</br> i.e. <span class="math notranslate nohighlight">\([b,\; t,\; h*w,\; c]\)</span> -&gt; <span class="math notranslate nohighlight">\([\mathbf{b*t},\; h*w,\; c]\)</span></p></li>
-<li><p>Temporal attention
-</br>: 차원 축 순서 바꾸기 for 시간 축을 고려한 attention 계산
-</br> i.e. <span class="math notranslate nohighlight">\([b,\; t,\; h*w,\; c]\)</span> -&gt; <span class="math notranslate nohighlight">\([\mathbf{b*h*w},\; \mathbf{t},\; c]\)</span></p></li>
-</ul>
-</li>
-<li><p>레퍼런스 이미지의 디테일을 잘 반영하는 새로운 attention 결합 방식 제안
-</br> =&gt; Spatial Attention Layer</p>
-<p><img alt="attention_aggregation" src="../../_images/attention_aggregation.png" /></p>
 </li>
 </ul>
 </section>
 <section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>캐릭터 애니메이션(Character Animation)은 레퍼런스 이미지에 포즈를 반영한 비디오를 생성하는 테스크</p></li>
-<li><p>지금까지 일관성(consistency)과 일반성(generalizability)을 동시에 만족하는 방법은 없었음</p>
+<li><p>LLM이 가지고 있는 기본 한계</p>
 <ul>
-<li><p>일관성 문제: 동영상 내에 캐릭터 디테일들이 변함</p></li>
-<li><p>일반성 문제: 기존 방식들 소스 캐릭터 이미지에 대해 파인튜닝함</p></li>
+<li><p>최신 정보 활용, 환각</p></li>
+<li><p>저자원 언어 이해</p></li>
+<li><p>수학 스킬</p></li>
+<li><p>시간 경과 (오늘, 내일 등)</p></li>
 </ul>
 </li>
-<li><p>일관성과 일반성을 만족하는 AnimateAnyone 제안</p></li>
-<li><p>AnimateAnyone 방법 소개</p>
+<li><p>이를 해결 하기 위한, 가장 간단한 방법은 외부 tool을 사용 하는 방법</p></li>
+<li><p>최근 Tool을 사용하는 방법은 다음과 같은 한계</p>
 <ul>
-<li><p>(3D) Denoising Unet</p>
-<ul>
-<li><p>비디오 생성 모델</p></li>
-<li><p><strong>Temporal layer</strong> 추가</p>
-<ul>
-<li><p>multi-frame inputs을 처리할 수 있는 변형된 SD Unet 구조 사용</p></li>
+<li><p>사람의 labeling 필요.</p></li>
+<li><p>또한 Tool이 고정되어 있어 다양한 Tool를 사용 불가</p></li>
 </ul>
 </li>
-<li><p><strong>Spatial Attention Layer</strong> 로 self-attention 대체</p>
-<ul>
-<li><p>레퍼런스 이미지 정보 결합 레이어</p></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><strong>ReferenceNet</strong></p>
-<ul>
-<li><p>for 일관성</p></li>
-<li><p>SD Unet과 동일 구조</p></li>
-<li><p>레퍼런스 이미지의 spatial 정보 추출하고 denoising UNet에 결합하여 학습 =&gt; 레퍼런스 이미지의 디테일들을 더 잘 유지</p></li>
-</ul>
-</li>
-<li><p><strong>Pose Guider</strong></p>
-<ul>
-<li><p>포즈 시퀀스 인코더</p></li>
-<li><p>Pose Guider가 추출한 features에 노이즈를 더해서 모델에 입력 =&gt; 원하는 포즈 반영</p></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>내부 5K 데이터셋으로 모델 학습하여 SOTA 달성.</p></li>
+<li><p>따라서 Toolformer에서는 Self-supervised 방식으로 직접 데이터 셋을 만들어 학습에 활용하고, 5개의 Tools을 사용할 수 있도록 함.</p></li>
 </ul>
 </section>
 <section id="method">
 <h2>Method<a class="headerlink" href="#method" title="Permalink to this heading">#</a></h2>
-<p><img alt="architecture" src="../../_images/architecture.png" /></p>
 <ul class="simple">
-<li><p>주요 구성 요소: ReferenceNet, Pose Guider, Temporal Layer</p></li>
-<li><p>모델 구조</p>
+<li><p>ToolFomrer 목표</p>
 <ul>
-<li><p>입력: 레퍼런스 이미지, <span class="math notranslate nohighlight">\(t\)</span> 초의 포즈 시퀀스</p></li>
-<li><p>출력: <span class="math notranslate nohighlight">\(t\)</span> 초의 비디오</p></li>
-</ul>
-</li>
-<li><p>생성 프로세스</p>
+<li><p>Self-supervised 방식으로 사람의 Labeling 필요 X</p></li>
+<li><p>API call을 호출할 수 있는 LLM model M을 만드는 것.</p>
 <ul>
-<li><p>포즈 시퀀스 -&gt; PoseGuider -&gt; 노이즈 더하기 -&gt; N 번 * (Denoising UNet) -&gt; 비디오</p></li>
-<li><p>Denoising UNet에서 레퍼런스 features 사용</p>
-<ul>
-<li><p>레퍼런스 featuers : 레퍼런스 이미지 -&gt; ReferenceNet -&gt; 이미지</p></li>
+<li><p>언제 / 무엇을 / 어떻게 사용할지를 결정</p></li>
 </ul>
 </li>
 </ul>
 </li>
+<li><p>위의 목표를 수행하기 위해서 1) Annotation -&gt; 2) Filtering -&gt; 3) FT(Fine Tuning)
+<img alt="Method" src="../../_images/method.png" /></p></li>
+<li><p>여기서는 API calls을 다음과 같이 linearlize해서 나타냄</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(\&lt;API&gt; a_c(i_c) -&gt; r \&lt;/API&gt;\)</span></p></li>
+<li><p>-&gt; , &lt;API&gt;, &lt;/API&gt; s는 모두 special toekn</p></li>
 </ul>
-<section id="referencenet">
-<h3>ReferenceNet<a class="headerlink" href="#referencenet" title="Permalink to this heading">#</a></h3>
+</li>
+<li><p>원래 데이터 셋 <span class="math notranslate nohighlight">\(C\)</span> 가 주어지면, 위의 표현 API calls로 Augmented 된 <span class="math notranslate nohighlight">\(C'\)</span> 를 생성 후, <span class="math notranslate nohighlight">\(C'\)</span>을 활용해 LLM을 FT</p></li>
+</ul>
+<section id="sample-api-calls">
+<h3>1. Sample API Calls<a class="headerlink" href="#sample-api-calls" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
-<li><p>기존의 방식들은 SD에 이미지 조건을 반영하기 위해 CLIP 텍스트 인코더를 CLIP 이미지 인코더로 대체하여 사용함.</p></li>
-<li><p><strong>디테일</strong>을 잘 유지 못하는 일관성(consistency)의 문제가 발생</p>
+<li><p>가장 첫번째 API를 <strong>언제</strong> 부를지 결정</p>
 <ul>
-<li><p>CLIP은 낮은 해상도(224x224)의 이미지로 학습됨, SD는 (512x512) 이미지 생성</p></li>
-<li><p>CLIP 학습 방식이 semantic high-level feature matching 방식, 이미지 디테일 정보 손실 있음.</p></li>
+<li><p>즉 input x에 대해서 언제 API call를 하는 게 확률이 높은지 대해서 계산을 진행</p></li>
 </ul>
 </li>
-<li><p>레퍼런스 이미지의 디테일 정보를 더 잘 유지하기 위해 <strong>ReferenceNet</strong> 제안</p></li>
-<li><p>ReferenceNet은 CLIP 이미지 인코더를 사용하는 (2D) SD 구조 모델</p>
+<li><p>Few-shot prompt(하단 참고)를 활용해서 input x에 대해 API call를 annotate
+<img alt="Fewshot" src="../../_images/prompt_example.png" /></p></li>
+<li><p>이때 모든 위치 <span class="math notranslate nohighlight">\(i\)</span>에 대해서 모두 진행 (모든 API 종류에 대해서) 그 후 확률 값으로 필터링 진행 후 API 호출(최대 Top-k개)</p>
 <ul>
-<li><p>모델 SD 웨이트로 초기화</p></li>
+<li><p><span class="math notranslate nohighlight">\(p_i = p_M(\&lt;API&gt; | P(x), x_{1:i-1})\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(I = {i|p_i &gt; \tau_s}\)</span></p></li>
 </ul>
 </li>
-<li><p><strong>Spatial Attention layer</strong>를 통해 (3D) Denoising UNet에 레퍼런스 features 결합함.
-<img alt="attention_aggregation" src="../../_images/attention_aggregation.png" /></p>
-<ol class="arabic simple">
-<li><p>레퍼런스 features <span class="math notranslate nohighlight">\(t\)</span> 번 repeat</p></li>
-<li><p>Denoising UNet features와 <span class="math notranslate nohighlight">\(w\)</span> 축으로 concat</p></li>
-<li><p>self-attention 수행</p></li>
-<li><p>원래 UNet features에 해당하는 부분의 features만 추출</p></li>
-</ol>
-</li>
-<li><p>장점</p>
-<ol class="arabic simple">
-<li><p>SD의 feature modeling 능력 사용, 좋은 모델 초기화값</p></li>
-<li><p>ReferenceNet과 Denoising UNet이 feature space를 공유해서 학습이 쉬워짐</p></li>
-</ol>
-</li>
-<li><p>ControlNet과의 차이점
-<img alt="controlnet" src="../../_images/controlnet.png" /></p>
+<li><p>API calls 위치에 최대 M개의 다른 API calls 생성</p>
 <ul>
-<li><p>논문에서는 ControlNet의 조건(depth, edge)은 위치 align의 목적인데 여기서 레퍼런스 이미지는 위치 align이 목적이 아니기 때문에 적합하지 않다고 한다.</p></li>
-<li><p>방식을 비교하자면</p>
-<ul>
-<li><p>ControlNet은 attention 각자 수행 원래 output + 조건 output, dependent(연산량 2배)</p></li>
-<li><p>AnimateAnyone은 원래 output과 조건 output concat하고 attention 수행한 뒤 원래 부분만 사용, independent(pre-compute 가능)</p></li>
-</ul>
-</li>
-<li><p>번외) 최근 reference 용 ControlNet도 추가 되었다. attention layer에 직접 적용하는 다른 방식</p></li>
+<li><p>최대 5 * k (위치 최대 개수) * m(sampling 개수)개 생성.</p></li>
+<li><p>이때 형식이 안맞는 것은 discard</p></li>
+<li><p><img alt="API_example" src="../../_images/API_example.png" /></p></li>
 </ul>
 </li>
 </ul>
 </section>
-<section id="pose-guider">
-<h3>Pose Guider<a class="headerlink" href="#pose-guider" title="Permalink to this heading">#</a></h3>
+<section id="execute-api-calls">
+<h3>2. Execute API Calls<a class="headerlink" href="#execute-api-calls" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
-<li><p>포즈 조건을 주는 방식으로 ControlNet을 사용할 수 있지만, ControlNet은 연산량 2배됨 (dependent)</p></li>
-<li><p>light-weight 인코더 사용</p></li>
+<li><p>1번의 과정으로 얻은 모든 potentail API calls 실행해서 결과 얻어옴</p>
+<ul>
+<li><p>각 tools에 따라 다른 실행과정 (Appendix 참고)</p></li>
+</ul>
+</li>
 </ul>
 </section>
-<section id="temporal-layer">
-<h3>Temporal Layer<a class="headerlink" href="#temporal-layer" title="Permalink to this heading">#</a></h3>
+<section id="filter-api-calls">
+<h3>3. Filter API Calls<a class="headerlink" href="#filter-api-calls" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
-<li><p>Spatial-, Cross- Attention 뒤에 수행</p></li>
-<li><p>layer 자체는 AnimateDiff와 동일</p>
+<li><p>1, 2번에서 API calls를 포함한 데이터 셋을 만들었다면 그 데이터 셋을 필터링하는 과정</p></li>
+<li><p>Loss 값 활용</p></li>
+<li><p>API call과 response가 모델에 주어진 경우의 Loss와 반대되는 Loss를 비교해서 필터링 진행</p>
 <ul>
-<li><p>Temporal Attention</p>
-<ul>
-<li><p><span class="math notranslate nohighlight">\([b,\; t,\; h*w,\; c]\)</span> -&gt; <span class="math notranslate nohighlight">\([(b*h*w,\; t,\; c)]\)</span> -&gt; <span class="math notranslate nohighlight">\(t\)</span> 축으로 self-attention 수행</p></li>
+<li><p><span class="math notranslate nohighlight">\(L_i^+ = L_i(e(c_i, r_i))\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(L_i^- - min(L_i(\varnothing), L_i(e(c_i, \varnothing))\)</span></p></li>
+<li><p>반대되는 로스(-) 는 API call이 없는 경우, reponse가 없는 경우 중에 작은 걸 선택</p></li>
 </ul>
 </li>
+<li><p>두 개의 Loss 차이가 일정 임계값보다 넘으면 선택 진행</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(L_i^- - L_i^+ \geq \tau_f\)</span>
+<img alt="filtering" src="../../_images/filtering_example.png" /></p></li>
 </ul>
 </li>
-<li><p>일관성을 유지한 자연스러운 비디오 생성에 도움</p></li>
 </ul>
 </section>
-<section id="training-strategy">
-<h3>Training Strategy<a class="headerlink" href="#training-strategy" title="Permalink to this heading">#</a></h3>
+<section id="finetune-llm-with-augmented-dataset-with-api-calls">
+<h3>4. Finetune LLM with augmented dataset(with API calls)<a class="headerlink" href="#finetune-llm-with-augmented-dataset-with-api-calls" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
-<li><p>2 단계</p>
+<li><p>앞선 단계를 다 거친 후 최종 API call과 원래의 input을 합쳐서 새로운 <span class="math notranslate nohighlight">\(C'\)</span> 데이터 셋 생성</p></li>
+<li><p><span class="math notranslate nohighlight">\('C'\)</span>와 <span class="math notranslate nohighlight">\(C\)</span>는 API call 부분을 제외하고, 원래 text와 동일함</p>
 <ul>
-<li><p>I stage: 레퍼런스 이미지로 타겟 포즈 생성 학습 (single frame)</p></li>
-<li><p>II stage: 자연스러운 비디오 생성 (multi frames)</p></li>
+<li><p>LLM이 사전학습때 본 데이터, 사전학습때 사용한 학습 방식으로 친숙함.</p></li>
 </ul>
 </li>
-<li><p>I stage</p>
-<ul>
-<li><p>레퍼런스 이미지로 타겟 포즈 생성 학습 (single frame)</p></li>
-<li><p>레퍼런스 이미지는 비디오 클립에서 랜덤하게 고름</p></li>
-<li><p>학습 : denoising UNet(Temporal layer 배제), ReferenceNet, Pose Guider</p></li>
-<li><p>초기화</p>
-<ul>
-<li><p>denoising UNet, Reference Net: SD로 initialize</p></li>
-<li><p>Pose Guider: Gaussian 초기화, 마지막 projection layer는 zero conv</p></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>II stage (consistency)</p>
-<ul>
-<li><p>자연스러운 비디오 생성 (multi frames)</p></li>
-<li><p>학습: Temporal layer in denoising UNet</p></li>
-<li><p>초기화: AnimateDiff 모델 값</p></li>
-</ul>
-</li>
+<li><p><span class="math notranslate nohighlight">\(C'\)</span>을 활용해서 FT 진행</p></li>
 </ul>
 </section>
 </section>
-<section id="experiments">
-<h2>Experiments<a class="headerlink" href="#experiments" title="Permalink to this heading">#</a></h2>
-<section id="implementations">
-<h3>Implementations<a class="headerlink" href="#implementations" title="Permalink to this heading">#</a></h3>
+<section id="experiment">
+<h2>Experiment<a class="headerlink" href="#experiment" title="Permalink to this heading">#</a></h2>
+<p><img alt="Result" src="../../_images/result1.png" /></p>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>자체적으로 5K 캐릭터 비디오 클립 데이터 구축</p></li>
-<li><p>DWPose로 포즈 시퀀스 추출</p></li>
-<li><p>A100 4개 사용</p></li>
-<li><p>I stage: 768x768, center-cropped, 30,000 steps, 64 batch size</p></li>
-<li><p>II stage: 24 frame, 10,000 steps, 4 batch size, 1e-5 lr</p></li>
+<li><p>self-supervised 방법으로 데이터를 쉽게 생성하고, 필터링을 적용해서 퀄리티가 보장되는 것 처럼 보임.</p>
+<ul>
+<li><p>실제로 데이터 생성 퀄리티를 실험 예정</p></li>
 </ul>
-</section>
-<section id="id2">
-<h3>결과<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
-<ul class="simple">
-<li><p>real, animation 도메인 다 가능
-<img alt="quality" src="../../_images/quality.png" /></p></li>
-<li><p>포즈 더 잘 반영
-<img alt="pose" src="../../_images/pose.png" /></p></li>
-<li><p>레퍼런스 더 잘 반영
-<img alt="reference" src="../../_images/reference.png" /></p></li>
+</li>
+<li><p>이미 LLM이 잘하는 다음 단어 맞추기로 FT를 진행함</p></li>
 </ul>
-</section>
 </section>
 </section>
 
@@ -676,20 +570,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="Active_Retrieval_Augmented_Generation.html"
+       href="Ties-Merging.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Active Retrieval Augmented Generation</p>
+        <p class="prev-next-title">Ties-Merging</p>
       </div>
     </a>
     <a class="right-next"
-       href="Ask_Me_Anything.html"
+       href="sample_page.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Ask Me Anything: A simple strategy for prompting language models</p>
+        <p class="prev-next-title">Value Memory Graph: A Graph-Structured word model for offline reinforcement learning</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -708,21 +602,17 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">키워드</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preview">Preview이자 전부</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#method">Method</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#referencenet">ReferenceNet</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pose-guider">Pose Guider</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-layer">Temporal Layer</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-strategy">Training Strategy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-api-calls">1. Sample API Calls</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#execute-api-calls">2. Execute API Calls</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#filter-api-calls">3. Filter API Calls</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#finetune-llm-with-augmented-dataset-with-api-calls">4. Finetune LLM with augmented dataset(with API calls)</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#experiments">Experiments</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implementations">Implementations</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">결과</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#experiment">Experiment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
 </ul>
   </nav></div>
 
