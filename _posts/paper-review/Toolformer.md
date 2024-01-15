@@ -32,7 +32,7 @@
 ![Method](./materials/Toolformer/method.png)
 * 여기서는 API calls을 다음과 같이 linearlize해서 나타냄 
   * $<API> a_c(i_c) -> r </API>$
-  * -> , <API>, </API> s는 모두 special toekn 
+  * -> , \<API>, \</API> s는 모두 special toekn 
 * 원래 데이터 셋 $C$ 가 주어지면, 위의 표현 API calls로 Augmented 된 $C'$ 를 생성 후, $C'$을 활용해 LLM을 FT
 
 ### 1. Sample API Calls
