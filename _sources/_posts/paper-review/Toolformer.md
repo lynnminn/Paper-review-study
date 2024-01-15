@@ -71,8 +71,9 @@
 * $C'$을 활용해서 FT 진행
 
 ## Experiment
-![Result](./materials/Toolformer/result.png)
-
+![result_QA](./materials/Toolformer/result_search_QA.png)
+![result_cal](./materials/Toolformer/result_calendar_calculator.png)
+![result_MT](./materials/Toolformer/result_MT.png)
 ## Conclusion
 * self-supervised 방법으로 데이터를 쉽게 생성하고, 필터링을 적용해서 퀄리티가 보장되는 것 처럼 보임.
   * 실제로 데이터 생성 퀄리티를 실험 예정
