@@ -64,9 +64,10 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '_posts/paper-review/Value_Memory_Graph';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_posts/paper-review/[RL-1]Value_Memory_Graph';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Hindsight Experience Replay" href="%5BRL-2%5DHindsight_Experience_Replay.html" />
     <link rel="prev" title="Toolformer: Language Models Can Teach Themselves to Use Tools" href="Toolformer.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -168,7 +169,6 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="Active_Retrieval_Augmented_Generation.html">Active Retrieval Augmented Generation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="AnimateAnyone.html">Animate Anyone: Consistent and Controllable Image-to-Video Synthesis for Character Animation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Ask_Me_Anything.html">Ask Me Anything: A simple strategy for prompting language models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Hindsight_Experience_Replay.html">Hindsight Experience Replay</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Ties-Merging.html">Ties-Merging</a></li>
 
 
@@ -176,6 +176,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 <li class="toctree-l1"><a class="reference internal" href="Toolformer.html">Toolformer: Language Models Can Teach Themselves to Use Tools</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Value Memory Graph: A Graph-Structured word model for offline reinforcement learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%5BRL-2%5DHindsight_Experience_Replay.html">Hindsight Experience Replay</a></li>
 </ul>
 
     </div>
@@ -247,7 +248,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/executablebooks/Paper-review-study/issues/new?title=Issue%20on%20page%20%2F_posts/paper-review/Value_Memory_Graph.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/executablebooks/Paper-review-study/issues/new?title=Issue%20on%20page%20%2F_posts/paper-review/[RL-1]Value_Memory_Graph.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -277,7 +278,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../../_sources/_posts/paper-review/Value_Memory_Graph.md" target="_blank"
+      <li><a href="../../_sources/_posts/paper-review/[RL-1]Value_Memory_Graph.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -423,7 +424,7 @@ document.write(`
 </li>
 <li><p>본 방법론의 contributions는 4가지가 있음.</p></li>
 </ul>
-<p><img alt="overview" src="../../_images/img_11.png" /></p>
+<p><img alt="overview" src="../../_images/img_1.png" /></p>
 <ol class="arabic simple">
 <li><p>VMG는 offline RL 에서의 graph-structured world model임. VMG는 상태적으로 작고 discrete 한 action과 state space를 가진 graph-based MDP로 original environments를 표현함.</p></li>
 <li><p>contrastive learning 과 state 병합을 통해 offline dataset 에서 VMG를 학습하고 구축하는 방법을 디자인함.</p></li>
@@ -445,7 +446,7 @@ document.write(`
 <li><p>그런 후 VMG의 backbone으로 dataset의 metric space가 graph에 구축된다고 함.</p></li>
 </ul>
 <p>→ 결론적으로 MDP는 environment의 추상적인 표현 형태로(abstract representation) graph에 정의되게 됨.</p>
-<p><img alt="Untitled" src="../../_images/img_21.png" /></p>
+<p><img alt="Untitled" src="../../_images/img_2.png" /></p>
 <section id="vmg-metric-space-learning">
 <h3>3.1 VMG Metric space learning<a class="headerlink" href="#vmg-metric-space-learning" title="Permalink to this heading">#</a></h3>
 <hr class="docutils" />
@@ -472,7 +473,7 @@ document.write(`
 <li><p>State encoder (contrastive loss)</p>
 <ul>
 <li><p>예측된 next state <span class="math notranslate nohighlight">\(\tilde{f_{s'}}\)</span>가 ground truth <span class="math notranslate nohighlight">\(f_{s'}\)</span>와 가까워지게 학습됨.</p>
-<p><img alt="Untitled" src="../../_images/img_41.png" /></p>
+<p><img alt="Untitled" src="../../_images/img_4.png" /></p>
 <ul>
 <li><p>D: L2 Distance</p></li>
 <li><p><span class="math notranslate nohighlight">\(s_{neg,n}\)</span> : n-th negative state</p></li>
@@ -499,10 +500,10 @@ document.write(`
 </ul>
 </li>
 </ul>
-<p><img alt="Untitled" src="../../_images/img_51.png" /></p>
+<p><img alt="Untitled" src="../../_images/img_5.png" /></p>
 </li>
 <li><p>total training loss는 위 두 losses를 sum 한 형태로 이용함.</p>
-<p><img alt="Untitled" src="../../_images/img_61.png" /></p>
+<p><img alt="Untitled" src="../../_images/img_6.png" /></p>
 </li>
 </ul>
 <br>
@@ -510,7 +511,7 @@ document.write(`
 <section id="construct-the-graph-in-vmg">
 <h3>3.2 Construct the graph in VMG<a class="headerlink" href="#construct-the-graph-in-vmg" title="Permalink to this heading">#</a></h3>
 <hr class="docutils" />
-<p><img alt="Untitled" src="../../_images/img_71.png" /></p>
+<p><img alt="Untitled" src="../../_images/img_7.png" /></p>
 <ul>
 <li><p>Graph 구성 방법</p>
 <p><img alt="Untitled" src="../../_images/img_8.png" /></p>
@@ -592,7 +593,7 @@ document.write(`
 <ul class="simple">
 <li><p>D4RL 벤치마크를 활용한 실험</p></li>
 </ul>
-<p><img alt="Untitled" src="../../_images/img_111.png" /></p>
+<p><img alt="Untitled" src="../../_images/img_11.png" /></p>
 </section>
 <section id="future-works">
 <h2>5. Future works<a class="headerlink" href="#future-works" title="Permalink to this heading">#</a></h2>
@@ -659,6 +660,15 @@ document.write(`
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title">Toolformer: Language Models Can Teach Themselves to Use Tools</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="%5BRL-2%5DHindsight_Experience_Replay.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Hindsight Experience Replay</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>

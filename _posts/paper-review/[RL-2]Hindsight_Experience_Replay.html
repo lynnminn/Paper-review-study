@@ -64,11 +64,10 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '_posts/paper-review/Hindsight_Experience_Replay';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_posts/paper-review/[RL-2]Hindsight_Experience_Replay';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Ties-Merging" href="Ties-Merging.html" />
-    <link rel="prev" title="Ask Me Anything: A simple strategy for prompting language models" href="Ask_Me_Anything.html" />
+    <link rel="prev" title="Value Memory Graph: A Graph-Structured word model for offline reinforcement learning" href="%5BRL-1%5DValue_Memory_Graph.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -169,14 +168,14 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="Active_Retrieval_Augmented_Generation.html">Active Retrieval Augmented Generation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="AnimateAnyone.html">Animate Anyone: Consistent and Controllable Image-to-Video Synthesis for Character Animation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Ask_Me_Anything.html">Ask Me Anything: A simple strategy for prompting language models</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Hindsight Experience Replay</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Ties-Merging.html">Ties-Merging</a></li>
 
 
 
 
 <li class="toctree-l1"><a class="reference internal" href="Toolformer.html">Toolformer: Language Models Can Teach Themselves to Use Tools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Value_Memory_Graph.html">Value Memory Graph: A Graph-Structured word model for offline reinforcement learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%5BRL-1%5DValue_Memory_Graph.html">Value Memory Graph: A Graph-Structured word model for offline reinforcement learning</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Hindsight Experience Replay</a></li>
 </ul>
 
     </div>
@@ -248,7 +247,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/executablebooks/Paper-review-study/issues/new?title=Issue%20on%20page%20%2F_posts/paper-review/Hindsight_Experience_Replay.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/executablebooks/Paper-review-study/issues/new?title=Issue%20on%20page%20%2F_posts/paper-review/[RL-2]Hindsight_Experience_Replay.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -278,7 +277,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../../_sources/_posts/paper-review/Hindsight_Experience_Replay.md" target="_blank"
+      <li><a href="../../_sources/_posts/paper-review/[RL-2]Hindsight_Experience_Replay.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -413,7 +412,7 @@ document.write(`
 <ul>
 <li><p>아래 예시처럼 로봇으로 블록 쌓기 문제를 풀기 위해서는 (1) 블록을 잘 잡고 (2) 이동한 후 (3) 다른 블록 위에 쌓는 연속된 행동을 잘 해야 함</p></li>
 <li><p>이때의 보상은 일반적으로 블록을 잡았을 때 +1, 내려 놨을 때 +1, 떨어뜨릴 때 -1 과 같이 정의될 수 있음
-<img alt="robot" src="../../_images/img_1.png" /></p></li>
+<img alt="robot" src="../../_images/img_15.png" /></p></li>
 </ul>
 </li>
 <li><p>만약에 위와 같은 문제에서 빨간 블록을 잘 잡고 파란 블록 위에 놓았는데, 살짝 치우치게 놓아져서 자꾸 빨간 블록이 미끄러지는 상황이라고 가정해봤음</p>
@@ -432,7 +431,7 @@ document.write(`
 <h3>On policy / Off-policy<a class="headerlink" href="#on-policy-off-policy" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>HER은 과거 기억을 활용해서 reward를 구성하는 방법이기 때문에 off-policy 알고리즘에 적용이 쉬운 방법임
-<img alt="policy" src="../../_images/img_2.png" /></p>
+<img alt="policy" src="../../_images/img_21.png" /></p>
 <ul>
 <li><p><strong>On-policy</strong> : 데이터를 수집하는 모델(behavior policy)과 학습하는 모델(target policy)가 동일</p>
 <ul>
@@ -489,7 +488,7 @@ document.write(`
 <li><p>하지만 모든 문제들이 state와 goal을 동일하게 정의할 수 있는 것은 아니고, 특히 앞서 intro.에서 설명한 것 같이 다양한 goal을 가지는 문제의 경우 단순하게 g →  <span class="math notranslate nohighlight">\(s_T\)</span>로 바꾸는 방법을 사용할 수는 없음</p>
 <ul>
 <li><p>HER은  replay buffer에 원래 목표뿐만 아니라, additional goals을 sampling 해서 goal로 활용한다고 함
-<img alt="pseudo" src="../../_images/img_4.png" /></p></li>
+<img alt="pseudo" src="../../_images/img_41.png" /></p></li>
 </ul>
 </li>
 </ul>
@@ -505,14 +504,14 @@ document.write(`
 <li><p>State : robot joints의 velocities, angles, positions, rotations 등</p></li>
 <li><p>Goals : object의 position</p></li>
 <li><p>action :
-<img alt="per1" src="../../_images/img_5.png" /></p></li>
+<img alt="per1" src="../../_images/img_51.png" /></p></li>
 </ul>
 </li>
 </ul>
 <br>
 <ul>
 <li><p>multi-goal &amp; singe goal setting 일 때 성능</p>
-<p><img alt="per2" src="../../_images/img_6.png" /></p>
+<p><img alt="per2" src="../../_images/img_61.png" /></p>
 </li>
 <li><p>샘플링 방법과 샘플 수에 따른 성능 비교 : Future가 가장 성능이 좋음</p>
 <ul class="simple">
@@ -521,7 +520,7 @@ document.write(`
 <li><p>episode : 선택한 trajectory 내에서 선택된 sampled state의 위치와 상관없이 trajectory 내부 임의 state를 goal로 활용</p></li>
 <li><p>random : trajectory와 관계없이 학습 중 경험한 전체 state 중 임의의 state를 goal로 활용
 -&gt; 이 부분은 논문으로는 정확하게 이해가 안 가서 블로그 참고함 (<a class="reference external" href="https://ropiens.tistory.com/136">https://ropiens.tistory.com/136</a>)
-<img alt="per2" src="../../_images/img_7.png" /></p></li>
+<img alt="per2" src="../../_images/img_71.png" /></p></li>
 </ul>
 </li>
 </ul>
@@ -567,22 +566,13 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="Ask_Me_Anything.html"
+       href="%5BRL-1%5DValue_Memory_Graph.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Ask Me Anything: A simple strategy for prompting language models</p>
+        <p class="prev-next-title">Value Memory Graph: A Graph-Structured word model for offline reinforcement learning</p>
       </div>
-    </a>
-    <a class="right-next"
-       href="Ties-Merging.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Ties-Merging</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
