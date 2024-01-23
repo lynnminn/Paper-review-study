@@ -1,4 +1,4 @@
-# Value Memory Graph: A Graph-Structured word model for offline reinforcement learning
+# [RL-1] Value Memory Graph: A Graph-Structured word model for offline reinforcement learning
 
 > Editor: [민예린 (Yerin Min)](https://www.linkedin.com/in/yerinmin/)  
 >[![arXiv](https://img.shields.io/badge/arXiv-2206.04384-b31b1b.svg)](https://arxiv.org/pdf/2206.04384.pdf)

@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Hindsight Experience Replay &#8212; 논문 리뷰 스터디 - NLP, RL, CV</title>
+    <title>[RL-2] Hindsight Experience Replay &#8212; 논문 리뷰 스터디 - NLP, RL, CV</title>
   
   
   
@@ -67,7 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = '_posts/paper-review/[RL-2]Hindsight_Experience_Replay';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="prev" title="Value Memory Graph: A Graph-Structured word model for offline reinforcement learning" href="%5BRL-1%5DValue_Memory_Graph.html" />
+    <link rel="prev" title="[RL-1] Value Memory Graph: A Graph-Structured word model for offline reinforcement learning" href="%5BRL-1%5DValue_Memory_Graph.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -174,8 +174,8 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 <li class="toctree-l1"><a class="reference internal" href="Toolformer.html">Toolformer: Language Models Can Teach Themselves to Use Tools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="%5BRL-1%5DValue_Memory_Graph.html">Value Memory Graph: A Graph-Structured word model for offline reinforcement learning</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Hindsight Experience Replay</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%5BRL-1%5DValue_Memory_Graph.html">[RL-1] Value Memory Graph: A Graph-Structured word model for offline reinforcement learning</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">[RL-2] Hindsight Experience Replay</a></li>
 </ul>
 
     </div>
@@ -361,7 +361,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Hindsight Experience Replay</h1>
+    <h1>[RL-2] Hindsight Experience Replay</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -377,9 +377,9 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#universal-value-function-approximators-uvfa">Universal Value Function Approximators (UVFA)</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">3. Hindsight Experience Replay</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">기본 아이디어</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">알고리즘</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hindsight-experience-replay">3. Hindsight Experience Replay</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">기본 아이디어</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">알고리즘</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#experiment">4. Experiment</a><ul class="nav section-nav flex-column">
@@ -397,8 +397,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="hindsight-experience-replay">
-<h1>Hindsight Experience Replay<a class="headerlink" href="#hindsight-experience-replay" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="rl-2-hindsight-experience-replay">
+<h1>[RL-2] Hindsight Experience Replay<a class="headerlink" href="#rl-2-hindsight-experience-replay" title="Permalink to this heading">#</a></h1>
 <blockquote>
 <div><p>Editor: <a class="reference external" href="https://www.linkedin.com/in/yerinmin/">민예린 (Yerin Min)</a><br />
 <a class="reference external" href="https://arxiv.org/pdf/1707.01495.pdf"><img alt="arXiv" src="https://img.shields.io/badge/arXiv-1707.01495-b31b1b.svg" /></a>
@@ -465,10 +465,10 @@ document.write(`
 <br>
 </section>
 </section>
+<section id="hindsight-experience-replay">
+<h2>3. Hindsight Experience Replay<a class="headerlink" href="#hindsight-experience-replay" title="Permalink to this heading">#</a></h2>
 <section id="id1">
-<h2>3. Hindsight Experience Replay<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
-<section id="id2">
-<h3>기본 아이디어<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
+<h3>기본 아이디어<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>💡 실패한 경험도 돌아보면서, 재활용할 경험이 있는지 보자!
 </pre></div>
 </div>
@@ -482,8 +482,8 @@ document.write(`
 </li>
 </ul>
 </section>
-<section id="id3">
-<h3>알고리즘<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
+<section id="id2">
+<h3>알고리즘<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>하지만 모든 문제들이 state와 goal을 동일하게 정의할 수 있는 것은 아니고, 특히 앞서 intro.에서 설명한 것 같이 다양한 goal을 가지는 문제의 경우 단순하게 g →  <span class="math notranslate nohighlight">\(s_T\)</span>로 바꾸는 방법을 사용할 수는 없음</p>
 <ul>
@@ -571,7 +571,7 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Value Memory Graph: A Graph-Structured word model for offline reinforcement learning</p>
+        <p class="prev-next-title">[RL-1] Value Memory Graph: A Graph-Structured word model for offline reinforcement learning</p>
       </div>
     </a>
 </div>
@@ -595,9 +595,9 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#universal-value-function-approximators-uvfa">Universal Value Function Approximators (UVFA)</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">3. Hindsight Experience Replay</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">기본 아이디어</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">알고리즘</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hindsight-experience-replay">3. Hindsight Experience Replay</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">기본 아이디어</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">알고리즘</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#experiment">4. Experiment</a><ul class="nav section-nav flex-column">

@@ -1,4 +1,4 @@
-# Hindsight Experience Replay
+# [RL-2] Hindsight Experience Replay
 
 > Editor: [민예린 (Yerin Min)](https://www.linkedin.com/in/yerinmin/)  
 >[![arXiv](https://img.shields.io/badge/arXiv-1707.01495-b31b1b.svg)](https://arxiv.org/pdf/1707.01495.pdf)
